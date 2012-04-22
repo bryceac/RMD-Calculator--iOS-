@@ -98,13 +98,13 @@
     [db setDBPath:@"mrd.db"];
     [db setDPath:[db dbpath]];
     
-    /* if([db saveData:born :ira :distrib])
+    if([db saveData:born :ira :distrib])
     {
         self.status.text = @"Save Successful";
     } else {
         self.status.text = @"Could not save data";
-    } */
-    [db saveData:born :ira :distrib];
+    }
+    
     [mf release];
     [db release];
 }
@@ -131,27 +131,9 @@
         [df release];
         self.bal.text = [NSString stringWithFormat:@"%.2f", [db bal]];
         self.year.text = [NSString stringWithFormat:@"%d", [db year]];
-    } else if ([[db birth] length] == 0 && [db bal] != 0 && [db year] != 0) {
-        self.bal.text = [NSString stringWithFormat:@"%.2f", [db bal]];
-        self.year.text = [NSString stringWithFormat:@"%d", [db year]];
-        [bf release];
-        [df release];
-    } else if ([[db birth] length] == 0 && [db bal] == 0.0 && [db year] != 0) {
-        self.year.text = [NSString stringWithFormat:@"%d", [db year]];
-        [bf release];
-        [df release];
-    } else if ([[db birth] length] == 0 && [db bal] != 0.0 && [db year] == 0) {
-        self.bal.text = self.bal.text = [NSString stringWithFormat:@"%.2f", [db bal]];
-        [bf release];
-        [df release];
-    } else if ([[db birth] length] > 0 && [db bal] == 0.0 && [db year] == 0) {
-        NSDate* birthdate = [df dateFromString:[db birth]];
-        bd = [bf stringFromDate:birthdate];
-        self.birth.text = bd;
-        [bf release];
-        [df release];
+        self.status.text = @"All data loaded successfully";
     } else {
-        self.status.text = @"Could not load any data";
+        self.status.text = @"Could not load all/any data.";
     }
     [bf release];
     [df release];

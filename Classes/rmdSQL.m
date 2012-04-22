@@ -21,10 +21,17 @@
     {
         [self setDBPath:nil];
         [self setDPath:nil];
-        [self saveData:nil :nil :nil];
-        [self updateBal:nil];
+        [self saveData:nil :0 :0];
+        [self updateBal:0];
         [self updateBirth:nil];
         [self updateYear:0];
+        
+        // set strings with no setter methods to zero or null
+        stmt = nil;
+        birth = nil;
+        bal = 0;
+        year = 0;
+        records = 0;
     }
     return self;
 }
@@ -54,8 +61,10 @@
     return dpath;
 }
 
--(void)saveData:(NSString *)a :(double)b :(int)c
+-(BOOL)saveData:(NSString *)a :(double)b :(int)c
 {
+    int test;
+    
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO rmd (birth, bal, year) VALUES (?, ?, ?)"];
@@ -69,14 +78,20 @@
         
         if (sqlite3_step(stmt) == SQLITE_DONE) 
         {
-            NSLog(@"Save successful");
+            test = 1;
         } else {
-            NSLog(@"Could not save date");
+            test = 0;
         }
         
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);
     }
+    
+    if (test == 0) 
+    {
+        return NO;
+    }
+    return YES;
 }
 
 -(NSString*)birth
@@ -90,10 +105,10 @@
         sqlite3_prepare_v2(mrdDB, birth_stmt, -1, &stmt, NULL);
         if (sqlite3_step(stmt) == SQLITE_ROW) 
         {
-            if ((char *)sqlite3_column_text(stmt, 0))
-            {
+            /* if ((char *)sqlite3_column_text(stmt, 0))
+            { */
                 curr = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_int(stmt, 0)];
-            }
+            // }
         } else {
             NSLog(@"Either no record can be found or field is empty");
         }
@@ -213,8 +228,8 @@
 {
     [self setDBPath:nil];
     [self setDPath:nil];
-    [self saveData:nil :nil :nil];
-    [self updateBal:nil];
+    [self saveData:nil :0 :0];
+    [self updateBal:0];
     [self updateBirth:nil];
     [self updateYear:0];
     [super dealloc]; // free memory

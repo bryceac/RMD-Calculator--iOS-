@@ -28,7 +28,7 @@
 /* the following are setter methods or methods to perform SQL operations like UPDATE and INSERT */
 -(void)setDBPath:(NSString*)f;
 -(void)setDPath:(NSString*)g;
--(void)saveData:(NSString*)a:(double)b:(int)c;
+-(BOOL)saveData:(NSString*)a:(double)b:(int)c;
 -(void)updateBirth:(NSString*)m;
 -(void)updateBal:(double)n;
 -(void)updateYear:(int)o;
