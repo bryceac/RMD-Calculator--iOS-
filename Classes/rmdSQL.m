@@ -27,7 +27,6 @@
         [self updateYear:0];
         
         // set strings with no setter methods to zero or null
-        stmt = nil;
         birth = nil;
         bal = 0;
         year = 0;
@@ -67,6 +66,7 @@
     
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
+        sqlite3_stmt *stmt;
         NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO rmd (birth, bal, year) VALUES (?, ?, ?)"];
         const char *insert_stmt = [insertSQL UTF8String];
         
@@ -99,16 +99,19 @@
     NSString *curr;
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
+        sqlite3_stmt *stmt;
         NSString* birth_sql = [NSString stringWithFormat:@"SELECT date(birth) FROM rmd LIMIT 1"];
         const char* birth_stmt = [birth_sql UTF8String];
         
         sqlite3_prepare_v2(mrdDB, birth_stmt, -1, &stmt, NULL);
         if (sqlite3_step(stmt) == SQLITE_ROW) 
         {
-            /* if ((char *)sqlite3_column_text(stmt, 0))
-            { */
-                curr = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_int(stmt, 0)];
-            // }
+            if ((char *)sqlite3_column_text(stmt, 0))
+            {
+                NSString* result = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(stmt, 0)];
+                curr = result;
+                [result release];
+            }
         } else {
             NSLog(@"Either no record can be found or field is empty");
         }
@@ -116,11 +119,11 @@
         sqlite3_close(mrdDB);
     }
     birth = curr;
-    [curr release];
     return birth;
 }
 -(double)bal
 {
+    sqlite3_stmt *stmt;
     NSString *curr;
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
@@ -132,7 +135,9 @@
         {
             if ((char *)sqlite3_column_text(stmt, 0))
             {
-                curr = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_int(stmt, 0)];
+                NSString* result = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(stmt, 0)];
+                curr = result;
+                [result release];
             }
         } else {
             NSLog(@"Either no record can be found or field is empty");
@@ -141,12 +146,12 @@
         sqlite3_close(mrdDB);
     }
     bal = curr.doubleValue;
-    [curr release];
     return bal;
 }
 
 -(int)year
 {
+    sqlite3_stmt *stmt;
     NSString *curr;
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
@@ -158,7 +163,9 @@
         {
             if ((char *)sqlite3_column_text(stmt, 0))
             {
-                curr = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_int(stmt, 0)];
+                NSString* result = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(stmt, 0)];
+                curr = result;
+                [result release];
             }
         } else {
             NSLog(@"Either no record can be found or field is empty");
@@ -167,12 +174,12 @@
         sqlite3_close(mrdDB);
     }
     year = curr.intValue;
-    [curr release];
     return year;
 }
 
 -(int)records
 {
+    sqlite3_stmt *stmt;
     NSString *curr;
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
@@ -182,7 +189,9 @@
         sqlite3_prepare_v2(mrdDB, r_stmt, -1, &stmt, NULL);
         if (sqlite3_step(stmt) == SQLITE_ROW) 
         {
-            curr = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_int(stmt, 0)];
+            NSString* result = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(stmt, 0)];
+            curr = result;
+            [result release];
         } else {
             NSLog(@"No records exist");
         }
@@ -190,7 +199,6 @@
         sqlite3_close(mrdDB);
     }
     records = curr.intValue;
-    [curr release];
     return records;
 }
 

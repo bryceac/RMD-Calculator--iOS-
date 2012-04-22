@@ -122,22 +122,15 @@
     [db setDBPath:@"mrd.db"];
     [db setDPath:[db dbpath]];
     
-    if ([[db birth] length] > 0 && [db bal] != 0.0 && [db year] != 0) 
-    {
-        NSDate* birthdate = [df dateFromString:[db birth]];
-        bd = [bf stringFromDate:birthdate];
-        self.birth.text = bd;
-        [bf release];
-        [df release];
-        self.bal.text = [NSString stringWithFormat:@"%.2f", [db bal]];
-        self.year.text = [NSString stringWithFormat:@"%d", [db year]];
-        self.status.text = @"All data loaded successfully";
-    } else {
-        self.status.text = @"Could not load all/any data.";
-    }
+    NSDate* birthdate = [df dateFromString:[db birth]];
+    bd = [bf stringFromDate:birthdate];
+    self.birth.text = bd;
     [bf release];
     [df release];
-    [db release];
+    self.bal.text = [NSString stringWithFormat:@"%f", [db bal]];
+    self.year.text = [NSString stringWithFormat:@"%d", [db year]];
+    self.status.text = @"All data loaded successfully";
+    // self.status.text = @"Could not load data because no records exist.";
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

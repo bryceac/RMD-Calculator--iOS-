@@ -12,7 +12,6 @@
 {
     NSString* dbpath;
     sqlite3 *mrdDB;
-    sqlite3_stmt *stmt;
     NSString *birth, *nbirth;
     int records, year, nyear;
     double bal, nbal;
