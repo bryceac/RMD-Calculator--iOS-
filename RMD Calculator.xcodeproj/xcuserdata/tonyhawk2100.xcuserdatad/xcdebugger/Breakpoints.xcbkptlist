@@ -4,46 +4,6 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Classes/RMD_CalculatorViewController.m"
-         timestampString = "341886656.626052"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "13"
-         endingLineNumber = "13"
-         landmarkName = "picker"
-         landmarkType = "19">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[RMD_CalculatorViewController picker]"
-               urlString = "file://localhost/Users/tonyhawk2100/Programs/iphone/RMD%20Calculator/Classes/RMD_CalculatorViewController.m"
-               timestampString = "341886657.198039"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "13"
-               endingLineNumber = "13">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[RMD_CalculatorViewController setPicker:]"
-               urlString = "file://localhost/Users/tonyhawk2100/Programs/iphone/RMD%20Calculator/Classes/RMD_CalculatorViewController.m"
-               timestampString = "341886657.198246"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "13"
-               endingLineNumber = "13">
-            </Location>
-         </Locations>
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"

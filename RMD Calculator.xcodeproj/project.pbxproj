@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* RMD_CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* RMD_CalculatorViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* RMD_CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* RMD_CalculatorViewController.m */; };
+		55034D851543816E00AE59C9 /* rmdSQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 55034D841543816E00AE59C9 /* rmdSQL.m */; };
 		550D579E153C6622006170DE /* mrd.db in Resources */ = {isa = PBXBuildFile; fileRef = 550D579D153C6622006170DE /* mrd.db */; };
 		551A5BAA146208400038703A /* rmd_icon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 551A5BA9146208400038703A /* rmd_icon_small.png */; };
 		551A5BAC146208460038703A /* rmd_icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 551A5BAB146208460038703A /* rmd_icon_114.png */; };
@@ -36,6 +37,8 @@
 		28D7ACF70DDB3853001CB0EB /* RMD_CalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMD_CalculatorViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* RMD_Calculator_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMD_Calculator_Prefix.pch; sourceTree = "<group>"; };
+		55034D831543816E00AE59C9 /* rmdSQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rmdSQL.h; sourceTree = "<group>"; };
+		55034D841543816E00AE59C9 /* rmdSQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rmdSQL.m; sourceTree = "<group>"; };
 		550D579D153C6622006170DE /* mrd.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mrd.db; sourceTree = "<group>"; };
 		551A5BA9146208400038703A /* rmd_icon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rmd_icon_small.png; sourceTree = "<group>"; };
 		551A5BAB146208460038703A /* rmd_icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rmd_icon_114.png; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 				1D3623250D0F684500981E51 /* RMD_CalculatorAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* RMD_CalculatorViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* RMD_CalculatorViewController.m */,
+				55034D831543816E00AE59C9 /* rmdSQL.h */,
+				55034D841543816E00AE59C9 /* rmdSQL.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				28D7ACF80DDB3853001CB0EB /* RMD_CalculatorViewController.m in Sources */,
 				5531CEC6153A7189002E8160 /* calcDate.m in Sources */,
 				5531CEC9153A71BB002E8160 /* RMD.m in Sources */,
+				55034D851543816E00AE59C9 /* rmdSQL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

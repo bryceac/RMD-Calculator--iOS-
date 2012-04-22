@@ -20,9 +20,7 @@
     IBOutlet UIToolbar* yt;
     IBOutlet UIToolbar* dt;
     IBOutlet UIDatePicker* dpicker;
-    NSString *dbpath;
     IBOutlet UILabel* status;
-    sqlite3 *mrdDB;
 
 }
 
@@ -36,9 +34,6 @@
 @property (nonatomic, retain) IBOutlet UIToolbar* dt;
 @property (nonatomic, retain) IBOutlet UIDatePicker* dpicker;
 @property (nonatomic, retain) IBOutlet UILabel* status;
-- (void)updateBirth:(NSString*)b:(NSString*)c;
-- (int)checkRecords;
-- (NSString*)getSQLBirth;
 - (IBAction)calc:(id)sender;
 - (IBAction)displayYear;
 - (IBAction)displayBirth;
