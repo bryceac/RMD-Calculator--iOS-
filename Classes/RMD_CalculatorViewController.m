@@ -97,15 +97,47 @@
     // set the database path
     [db setDBPath:@"mrd.db"];
     [db setDPath:[db dbpath]];
-    if ([db records] == 0) 
+    if([db saveData:born :ira :distrib])
     {
-        if([db saveData:born :ira :distrib])
+        self.status.text = @"Save successful";
+    } else {
+        self.status.text = @"Could not save data";
+    }
+    [mf release];
+    [db release];
+}
+
+- (IBAction)updateData:(id)sender
+{
+    rmdSQL* db = [[rmdSQL alloc] init];
+    NSDateFormatter* sf = [[NSDateFormatter alloc] init];
+    [sf setDateFormat:@"MM/dd/yyyy"];
+    NSDateFormatter* mf = [[NSDateFormatter alloc] init];
+    [mf setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString* born = self.birth.text;
+    int distrib = self.year.text.intValue;
+    double ira = self.bal.text.doubleValue;
+    
+    NSDate* bdate = [sf dateFromString:born];
+    [sf release];
+    born = [mf stringFromDate:bdate];
+    
+    // set the database path
+    [db setDBPath:@"mrd.db"];
+    [db setDPath:[db dbpath]];
+    if ([db records])
+    {
+        if([db updateData:born :ira :distrib])
         {
-            self.status.text = @"Save Successful";
+            self.status.text = @"Record updated sucessfully";
         } else {
-            self.status.text = @"Could not save data";
+            self.status.text = @"Record could not be updated";
         }
-    } else;
+    } else {
+        self.status.text = @"Cannot find any records";
+    }
+    
     [mf release];
     [db release];
 }
