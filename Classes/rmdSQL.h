@@ -12,9 +12,9 @@
 {
     NSString* dbpath;
     sqlite3 *mrdDB;
-    NSString *birth, *nbirth;
-    int records, year, nyear;
-    double bal, nbal;
+    NSString *birth;
+    int records, year;
+    double bal;
     
     // variables to get document directory
     NSArray *dirPaths;
@@ -28,19 +28,13 @@
 -(void)setDBPath:(NSString*)f;
 -(void)setDPath:(NSString*)g;
 -(BOOL)saveData:(NSString*)a:(double)b:(int)c;
--(void)updateBirth:(NSString*)m;
--(void)updateBal:(double)n;
--(void)updateYear:(int)o;
+-(BOOL)updateData:(NSString*)d:(double)e:(int)f;
 /* the following three are used to retrieve the currently saved data for input to programs */
 -(NSString*)birth;
 -(double)bal;
 -(int)year;
--(int)records; // method used to determine whether update is possible or not
-/* the following three methods gets items to be updated */
--(NSString*)nbirth;
--(double)nbal;
--(int)nyear;
-// the following set the database path
+-(BOOL)records; // method used to determine whether update is possible or not
+// the following gets the database path
 -(const char*)dpath;
 -(NSString*)dbpath;
 @end
