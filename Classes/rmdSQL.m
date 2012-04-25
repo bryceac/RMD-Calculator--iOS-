@@ -185,106 +185,63 @@
         NSString* updateSQL;
         const char *update_stmt;
         
-        if (![[self birth] isEqualToString:d]) 
+        if ([[self birth] isEqualToString:d] != YES) 
         {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth = \"?\" WHERE id = 1"];
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_text(stmt, 1, [d UTF8String], -1, SQLITE_TRANSIENT);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
         } else if ([self bal] != e) {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET bal = \"?\" WHERE id = 1"];
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET bal =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_double(stmt, 1, e);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
         } else if ([self year] != f) {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET year = \"?\" WHERE id = 1"];
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET year =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_int(stmt, 1, f);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
-        } else if (![[self birth] isEqualToString:d] && [self bal] != e) {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth = \"?\", bal = \"?\" WHERE id = 1"];
+        } else if ([[self birth] isEqualToString:d] != YES && [self bal] != e) {
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth =?, bal =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_text(stmt, 1, [d UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_double(stmt, 2, e);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
-        } else if (![[self birth] isEqualToString:d] && [self year] != f) {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth = \"?\", year = \"?\" WHERE id = 1"];
+        } else if ([[self birth] isEqualToString:d] != YES && [self year] != f) {
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth =?, year =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_text(stmt, 1, [d UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_int(stmt, 2, f);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
         } else if ([self bal] != e && [self year] != f) {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET bal = \"?\", year = \"?\" WHERE id = 1"];
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET bal =?, year =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_double(stmt, 1, e);
             sqlite3_bind_int(stmt, 2, f);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
-        } else if (![[self birth] isEqualToString:d] && [self bal] != e && [self year] != f) {
-            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth = \"?\", bal = \"?\", year = \"?\" WHERE id = 1"];
+        } else if ([[self birth] isEqualToString:d] != YES && [self bal] != e && [self year] != f) {
+            updateSQL = [NSString stringWithFormat:@"UPDATE rmd SET birth =?, bal =?, year =? WHERE id = 1"];
             update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(mrdDB, update_stmt, -1, &stmt, NULL);
             
             sqlite3_bind_text(stmt, 1, [d UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_double(stmt, 2, e);
             sqlite3_bind_int(stmt, 3, f);
-            
-            if (sqlite3_step(stmt) == SQLITE_DONE) 
-            {
-                test = 1;
-            } else {
-                test = 0;
-            }
+        } else;
+        
+        if (sqlite3_step(stmt) == SQLITE_DONE) 
+        {
+            test = 1;
         } else {
             test = 0;
         }
+        
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);
     }
