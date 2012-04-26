@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <sqlite3.h>
 
 @interface RMD_CalculatorViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 {

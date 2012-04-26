@@ -19,8 +19,6 @@
 {
     if (self = [super init])
     {
-        [self setDBPath:nil];
-        [self setDPath:nil];
         [self saveData:nil :0 :0];
         [self updateData:nil :0 :0];
         
@@ -33,36 +31,10 @@
     return self;
 }
 
--(void)setDBPath:(NSString *)f
-{
-    // get document directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // build database path
-    dbpath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:f]];
-}
-
--(void)setDPath:(NSString *)g
-{
-    dpath = [g UTF8String];
-}
-
--(NSString*)dbpath
-{
-    return dbpath;
-}
-
--(const char*)dpath
-{
-    return dpath;
-}
-
 -(BOOL)saveData:(NSString *)a :(double)b :(int)c
 {
     int test;
-    
-    if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
+    /* if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         sqlite3_stmt *stmt;
         NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO rmd (birth, bal, year) VALUES (?, ?, ?)"];
@@ -89,12 +61,27 @@
     {
         return NO;
     }
+    return YES; */
+    FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
+    [database open];
+    if ([database executeUpdate:@"INSERT INTO rmd (birth, bal, year) VALUES (?, ?, ?)", a, b, c,nil]) 
+    {
+        test = 1;
+    } else {
+        test = 0;
+    }
+    [database close];
+    
+    if (test == 0) 
+    {
+        return NO;
+    }
     return YES;
 }
 
 -(NSString*)birth
 {
-    if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
+    /* if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         sqlite3_stmt *stmt;
         NSString* birth_sql = [NSString stringWithFormat:@"SELECT date(birth) FROM rmd LIMIT 1"];
@@ -111,12 +98,20 @@
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);        
     }
+    return birth; */
+    FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"SELECT birth FROM rmd LIMIT 1"];
+    while ([results next]) 
+    {
+        birth = [results stringForColumnIndex:0];
+    }
+    [database close];
     return birth;
 }
 -(double)bal
 {
-    sqlite3_stmt *stmt;
-    if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
+    /* if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         NSString* ysql = [NSString stringWithFormat:@"SELECT bal FROM rmd LIMIT 1"];
         const char* y_stmt = [ysql UTF8String];
@@ -132,13 +127,21 @@
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);
     }
+    return bal; */
+    FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"SELECT bal FROM rmd LIMIT 1"];
+    while ([results next]) 
+    {
+        bal = [results doubleForColumnIndex:0];
+    }
+    [database close];
     return bal;
 }
 
 -(int)year
 {
-    sqlite3_stmt *stmt;
-    if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
+    /* if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         NSString* ysql = [NSString stringWithFormat:@"SELECT year FROM rmd LIMIT 1"];
         const char* y_stmt = [ysql UTF8String];
@@ -154,12 +157,22 @@
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);
     }
+    return year; */
+    FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"SELECT year FROM rmd LIMIT 1"];
+    while ([results next]) 
+    {
+        year = [results intForColumnIndex:0];
+    }
+    [database close];
     return year;
 }
 
 -(BOOL)records
 {
-    sqlite3_stmt *stmt;
+    int test;
+    /* sqlite3_stmt *stmt;
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         NSString* rsql = [NSString stringWithFormat:@"SELECT  COUNT(*) rmd"];
@@ -174,12 +187,15 @@
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);
     }
-    return NO;
+    return NO; */
+    FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
+    [database open];
+    [database close];
 }
 -(BOOL)updateData:(NSString *)d :(double)e :(int)f
 {
     int test;
-    if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
+   /* if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
         sqlite3_stmt *stmt;
         NSString* updateSQL;
@@ -250,13 +266,14 @@
     {
         return NO;
     }
-    return YES;
+    return YES; */
+    FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
+    [database open];
+    [database close];
 }
 
 -(void) dealloc
 {
-    [self setDBPath:nil];
-    [self setDPath:nil];
     [self saveData:nil :0 :0];
     [self updateData:nil :0 :0];
     [super dealloc]; // free memory

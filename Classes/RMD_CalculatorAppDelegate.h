@@ -14,8 +14,13 @@
 @interface RMD_CalculatorAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     RMD_CalculatorViewController *viewController;
+    NSString *dbname, *dbpath;
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet RMD_CalculatorViewController *viewController;
+@property (nonatomic, strong) NSString *dbpath;
+@property (nonatomic, strong) NSString *dbname;
+
+-(void)createDB;
 @end
 

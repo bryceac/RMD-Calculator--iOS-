@@ -13,6 +13,8 @@
 
 @synthesize window;
 @synthesize viewController;
+@synthesize dbname;
+@synthesize dbpath;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -20,42 +22,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
+    self.dbname = @"mrd.db";
     
-    // create database
-    sqlite3 *mrdDB;
-    NSString* dbpath;
-    NSString *docsDir;
-    NSArray *dirPaths;
+    NSArray *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [docsPath objectAtIndex:0];
     
-    // get document directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
+    self.dbpath = [docsDir stringByAppendingPathComponent:self.dbname];
     
-    // build path to database
-    dbpath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"mrd.db"]];
+    [self createDB];
     
-    NSFileManager *manage = [NSFileManager defaultManager];
-    
-    if ([manage fileExistsAtPath:dbpath] == NO) 
-    {
-        const char *dpath = [dbpath UTF8String];
-        
-        if (sqlite3_open(dpath, &mrdDB) == SQLITE_OK) 
-        {
-            char **errMessage;
-            const char *sql = "CREATE TABLE IF NOT EXISTS rmd (id INTEGER PRIMARY KEY AUTOINCREMENT, birth TEXT, bal REAL, year INTEGER)";
-            if (sqlite3_exec(mrdDB, sql, NULL, NULL, errMessage) != SQLITE_OK)
-            {
-                    
-            }
-            
-            sqlite3_close(mrdDB);
-            
-        } else;
-    }
-    
-    [manage release];
-
 	// Set the view controller as the window's root view controller and display.
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
@@ -63,7 +38,18 @@
     return YES;
 }
 
-
+- (void)createDB
+{
+    BOOL created;
+    
+    NSFileManager *manager = [NSFileManager defaultManager];
+    created = [manager fileExistsAtPath:dbpath];
+    
+    if (created) return;
+    NSString* appPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.dbname];
+    
+    [manager copyItemAtPath:appPath toPath:dbpath error:nil];
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
