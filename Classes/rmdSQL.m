@@ -64,7 +64,7 @@
     return YES; */
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
     [database open];
-    if ([database executeUpdate:@"INSERT INTO rmd (birth, bal, year) VALUES (?, ?, ?)", a, b, c,nil]) 
+    if ([database executeUpdateWithFormat:@"INSERT INTO rmd (birth, bal, year) VALUES (%@, %f, %d)", a, b, c,nil]) 
     {
         test = 1;
     } else {
@@ -101,7 +101,7 @@
     return birth; */
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
     [database open];
-    FMResultSet *results = [database executeQuery:@"SELECT birth FROM rmd LIMIT 1"];
+    FMResultSet *results = [database executeQuery:@"SELECT date(birth) FROM rmd LIMIT 1"];
     while ([results next]) 
     {
         birth = [results stringForColumnIndex:0];
@@ -171,7 +171,6 @@
 
 -(BOOL)records
 {
-    int test;
     /* sqlite3_stmt *stmt;
     if (sqlite3_open([self dpath], &mrdDB) == SQLITE_OK) 
     {
@@ -186,11 +185,18 @@
         } else;
         sqlite3_finalize(stmt);
         sqlite3_close(mrdDB);
+        
     }
     return NO; */
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
     [database open];
+    FMResultSet *results = [database executeQuery:@"SELECT count(*) FROM rmd"];
+    while ([results next]) 
+    {
+        records = [results intForColumnIndex:0];
+    }
     [database close];
+    return records;
 }
 -(BOOL)updateData:(NSString *)d :(double)e :(int)f
 {
@@ -269,7 +275,66 @@
     return YES; */
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
     [database open];
+    if ([[self birth] isEqualToString:d] != YES)
+    {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@ WHERE id = 1", d,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([self bal] != e) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET bal =%f WHERE id = 1", e,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([self year] != f) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET year =%d WHERE id = 1", f,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([[self birth] isEqualToString:d] != YES && [self bal] != e) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@, bal =%f WHERE id = 1", d, e,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([[self birth] isEqualToString:d] != YES && [self year] != f) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@, year =%d WHERE id = 1", d, f,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([self bal] != e && [self year] != f) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET bal =%f, year =%d WHERE id = 1", e, f,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([[self birth] isEqualToString:d] != YES && [self bal] != e && [self year] != f) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@, bal =%f, year =%d WHERE id = 1", d, e, f,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else {
+        test = 0;
+    }
     [database close];
+    
+    if (test == 0) 
+    {
+        return NO;
+    }
+    return YES;
 }
 
 -(void) dealloc

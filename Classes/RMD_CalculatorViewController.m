@@ -94,9 +94,6 @@
     [sf release];
     born = [mf stringFromDate:bdate];
     
-    // set the database path
-    [db setDBPath:@"mrd.db"];
-    [db setDPath:[db dbpath]];
     if([db saveData:born :ira :distrib])
     {
         self.status.text = @"Save successful";
@@ -124,8 +121,6 @@
     born = [mf stringFromDate:bdate];
     
     // set the database path
-    [db setDBPath:@"mrd.db"];
-    [db setDPath:[db dbpath]];
     if ([db records])
     {
         if([db updateData:born :ira :distrib])
@@ -150,10 +145,6 @@
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     NSString* bd;
-    
-    // set the database path
-    [db setDBPath:@"mrd.db"];
-    [db setDPath:[db dbpath]];
     
     if ([db records] > 0) 
     {
