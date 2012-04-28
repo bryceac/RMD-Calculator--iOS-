@@ -66,15 +66,20 @@
 {
 	NSDateFormatter* df = [[NSDateFormatter alloc] init];
 	[df setDateFormat:@"MM/dd/yyyy"];
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
+    NSNumber* ira = [nf numberFromString:self.bal.text];
 	RMD* retire = [[RMD alloc] init];
 	NSString* bd = self.birth.text;
     NSString* syear = self.year.text;
-	double balance = self.bal.text.doubleValue;
+	double balance = ira.doubleValue;
 	[retire setBD:[df dateFromString:bd]];
 	[retire setBal:balance];
 	[retire setYear:[syear intValue]];
-	self.rmd.text = [NSString stringWithFormat:@"%.2f", [retire rmd]];
+	self.rmd.text = [nf stringFromNumber:[NSNumber numberWithDouble:[retire rmd]]];
 	[df release];
+    [nf release];
 	[retire release];
 }
 
@@ -85,10 +90,14 @@
     [sf setDateFormat:@"MM/dd/yyyy"];
     NSDateFormatter* mf = [[NSDateFormatter alloc] init];
     [mf setDateFormat:@"yyyy-MM-dd"];
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
     
+    NSNumber* number = [nf numberFromString:self.bal.text];
     NSString* born = self.birth.text;
     int distrib = self.year.text.intValue;
-    double ira = self.bal.text.doubleValue;
+    double ira = number.doubleValue;
     
     NSDate* bdate = [sf dateFromString:born];
     [sf release];
@@ -102,6 +111,7 @@
     }
     [mf release];
     [db release];
+    [nf release];
 }
 
 - (IBAction)updateData:(id)sender
@@ -112,9 +122,15 @@
     NSDateFormatter* mf = [[NSDateFormatter alloc] init];
     [mf setDateFormat:@"yyyy-MM-dd"];
     
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
+    
+    NSNumber* number = [nf numberFromString:self.bal.text];
+    
     NSString* born = self.birth.text;
     int distrib = self.year.text.intValue;
-    double ira = self.bal.text.doubleValue;
+    double ira = number.doubleValue;
     
     NSDate* bdate = [sf dateFromString:born];
     [sf release];
@@ -135,6 +151,7 @@
     
     [mf release];
     [db release];
+    [nf release];
 }
 
 - (IBAction)loadData
@@ -145,6 +162,11 @@
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     NSString* bd;
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
+    
+    
     
     if ([db records] > 0) 
     {
@@ -153,13 +175,15 @@
         self.birth.text = bd;
         [bf release];
         [df release];
-        self.bal.text = [NSString stringWithFormat:@"%.2f", [db bal]];
+        self.bal.text = [nf stringFromNumber:[NSNumber numberWithDouble:[db bal]]];
+        [nf release];
         self.year.text = [NSString stringWithFormat:@"%d", [db year]];
         self.status.text = @"All data loaded successfully";
     } else {
         self.status.text = @"Could not load data because no records exist.";
         [bf release];
         [df release];
+        [nf release];
     }
 }
 

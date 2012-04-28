@@ -275,29 +275,14 @@
     return YES; */
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
     [database open];
-    if ([[self birth] isEqualToString:d] != YES)
+ if ([[self birth] isEqualToString:d] != YES && [self bal] != e && [self year] != f) {
+    if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@, bal =%f, year =%d WHERE id = 1", d, e, f,nil]) 
     {
-        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@ WHERE id = 1", d,nil]) 
-        {
-            test = 1;
-        } else {
-            test = 0;
-        }
-    } else if ([self bal] != e) {
-        if ([database executeUpdateWithFormat:@"UPDATE rmd SET bal =%f WHERE id = 1", e,nil]) 
-        {
-            test = 1;
-        } else {
-            test = 0;
-        }
-    } else if ([self year] != f) {
-        if ([database executeUpdateWithFormat:@"UPDATE rmd SET year =%d WHERE id = 1", f,nil]) 
-        {
-            test = 1;
-        } else {
-            test = 0;
-        }
-    } else if ([[self birth] isEqualToString:d] != YES && [self bal] != e) {
+        test = 1;
+    } else {
+        test = 0;
+    }
+} else if ([[self birth] isEqualToString:d] != YES && [self bal] != e) {
         if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@, bal =%f WHERE id = 1", d, e,nil]) 
         {
             test = 1;
@@ -318,8 +303,22 @@
         } else {
             test = 0;
         }
-    } else if ([[self birth] isEqualToString:d] != YES && [self bal] != e && [self year] != f) {
-        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@, bal =%f, year =%d WHERE id = 1", d, e, f,nil]) 
+        } else if ([[self birth] isEqualToString:d] != YES) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET birth =%@ WHERE id = 1", d,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([self bal] != e) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET bal =%f WHERE id = 1", e,nil]) 
+        {
+            test = 1;
+        } else {
+            test = 0;
+        }
+    } else if ([self year] != f) {
+        if ([database executeUpdateWithFormat:@"UPDATE rmd SET year =%d WHERE id = 1", f,nil]) 
         {
             test = 1;
         } else {
