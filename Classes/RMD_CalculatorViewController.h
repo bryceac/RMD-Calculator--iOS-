@@ -10,6 +10,7 @@
 
 @interface RMD_CalculatorViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 {
+    // the following are variables used to make the UI function
 	IBOutlet UIPickerView* picker;
 	NSArray* pickerArray;
 	IBOutlet UITextField* birth;
@@ -33,6 +34,8 @@
 @property (nonatomic, retain) IBOutlet UIToolbar* dt;
 @property (nonatomic, retain) IBOutlet UIDatePicker* dpicker;
 @property (nonatomic, retain) IBOutlet UILabel* status;
+
+// the following are methods used for making things like buttons and pickers functional
 - (IBAction)calc:(id)sender;
 - (IBAction)displayYear;
 - (IBAction)displayBirth;

@@ -31,6 +31,7 @@
     return self;
 }
 
+// the saveData method inserts a record into the SQLite Database
 -(BOOL)saveData:(NSString *)a :(double)b :(int)c
 {
     int test;
@@ -51,6 +52,7 @@
     return YES;
 }
 
+// the birth method retrieve the birth date that was saved in SQLite
 -(NSString*)birth
 {
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
@@ -63,6 +65,8 @@
     [database close];
     return birth;
 }
+
+// the bal method return the balance that was saved in SQLite
 -(double)bal
 {
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
@@ -76,6 +80,7 @@
     return bal;
 }
 
+// the year method return the year of distribution saved in SQLite
 -(int)year
 {
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
@@ -89,6 +94,7 @@
     return year;
 }
 
+/* the records method checks how many records exists in the SQLite database, which is important for successful retrieval from and updates to the database */
 -(BOOL)records
 {
     FMDatabase *database = [FMDatabase databaseWithPath:[DBPath getDBPath]];
@@ -101,6 +107,10 @@
     [database close];
     return records;
 }
+
+/* the updateData method takes inputted data and checks what needs to be updated.
+ * 1 and 0 are used to determine whether YES or NO should be returned, depending on multiple situations, since return statements end methods
+*/
 -(BOOL)updateData:(NSString *)d :(double)e :(int)f
 {
     int test;
@@ -168,6 +178,7 @@
     return YES;
 }
 
+// release class from memory
 -(void) dealloc
 {
     [self saveData:nil :0 :0];

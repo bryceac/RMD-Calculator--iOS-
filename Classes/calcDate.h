@@ -1,6 +1,9 @@
+/*
+* Copyright (c) 2012 Bryce Campbell. All Rights Reserved.
+*/
 #import <UIKit/UIKit.h>
 /*
-The predate class contains methods to get the previous year */
+The calcDate class contains methods to get a date with a certain year */
 @interface calcDate : NSObject
 {
 	NSDate* start; // variable to hold calendar data

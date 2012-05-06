@@ -1,0 +1,26 @@
+= RMD Calculator (iOS) =
+
+This is the source code for the RMD Calculator app for iOS. This program makes use of the [https://github.com/ccgus/fmdb FMDB] wrapper.
+
+== App support ==
+
+Support can be gained two ways:
+
+<ul>
+<li>
+<dl>
+<dt>E-mail:</dt>
+<dd>brycecmpbell@gmail.com</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt>Bug Tracker:</dt>
+<dd>http://brycecampbell.me/~bryce/mantis</dd>
+</dl>
+</li>
+</ul>
+
+== License ==
+
+The license can be found in in LICENSE.txt

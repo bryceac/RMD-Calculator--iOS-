@@ -5,7 +5,7 @@
 //  Created by Bryce Campbell on 4/21/12.
 //  Copyright (c) 2012 Bryce Campbell. All rights reserved.
 //
-
+// the rmdSQL class contains methods for saving, retrieving, and updating records in SQLite
 #import <UIKit/UIKit.h>
 #import "FMDatabase.h"
 #import "DBPath.h"

@@ -22,18 +22,21 @@
 @synthesize dpicker;
 @synthesize status;
 
+/* the following hides the keyboard when the user says done */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
 	return YES;
 }
 
+// display the year picker
 - (IBAction)displayYear
 {
     self.yt.hidden = NO;
     self.picker.hidden = NO;
 }
 
+// if year picker is visible, this sets the year with its selection
 - (IBAction)setYear
 {
     NSInteger row = [picker selectedRowInComponent:0];
@@ -44,12 +47,14 @@
     
 }
 
+// display birth picker
 - (IBAction)displayBirth
 {
     self.dt.hidden = NO;
     self.dpicker.hidden = NO;
 }
 
+// set birth date from picker selection
 - (IBAction)setB
 {
     NSDateFormatter* sf = [[NSDateFormatter alloc] init];
@@ -62,14 +67,18 @@
     [sf release];
 }
 
+// the calc METHOD sends input to RMD class for calculation and displays results in text field
 - (IBAction)calc:(id)sender
 {
 	NSDateFormatter* df = [[NSDateFormatter alloc] init];
 	[df setDateFormat:@"MM/dd/yyyy"];
+    // the following allows comma separators to be inputted
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
     [nf setPositiveFormat:@"#,###.##"];
     [nf setNegativeFormat:@"#,###.##"];
     NSNumber* ira = [nf numberFromString:self.bal.text];
+    
+    // the following sends input to RMD class and returns results
 	RMD* retire = [[RMD alloc] init];
 	NSString* bd = self.birth.text;
     NSString* syear = self.year.text;
@@ -78,11 +87,13 @@
 	[retire setBal:balance];
 	[retire setYear:[syear intValue]];
 	self.rmd.text = [nf stringFromNumber:[NSNumber numberWithDouble:[retire rmd]]];
+    // release formatters
 	[df release];
     [nf release];
-	[retire release];
+	[retire release]; // release RMD class from memory
 }
 
+// the savedata method send input to SQLite for insertion
 - (IBAction)saveData:(id)sender
 {
     rmdSQL* db = [[rmdSQL alloc] init];
@@ -114,6 +125,9 @@
     [nf release];
 }
 
+/* the updateData method updates the record that is found.
+* this was originally part of the saveData method, but in order to fix issues, it was made its own method.
+*/
 - (IBAction)updateData:(id)sender
 {
     rmdSQL* db = [[rmdSQL alloc] init];
@@ -154,6 +168,7 @@
     [nf release];
 }
 
+// the loadData method retrieves data from SQLite database
 - (IBAction)loadData
 {
     rmdSQL* db = [[rmdSQL alloc] init];

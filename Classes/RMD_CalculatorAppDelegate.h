@@ -3,7 +3,7 @@
 //  RMD Calculator
 //
 //  Created by Bryce Campbell on 4/25/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Bryce Campbell. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,7 +14,7 @@
 @interface RMD_CalculatorAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     RMD_CalculatorViewController *viewController;
-    NSString *dbname, *dbpath;
+    NSString *dbname, *dbpath; // variables to store database path
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet RMD_CalculatorViewController *viewController;

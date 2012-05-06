@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2012 Bryce Campbell. All Rights Reserved.
+*/
 #import "calcDate.h"
 @implementation calcDate
 
@@ -35,6 +38,7 @@
 }
 
 /* getter methods */
+/* the year method, previously named PrevYear, because it returned the previous year, returns the year of distribution */
 - (int)year
 {
     /* get previous year */
@@ -43,14 +47,19 @@
     /* get current year */
     return year;
 }
+// the month method returned the value of the month variable
 - (int)month
 {
 	return month;
 }
+
+// the day method returns the value of the day variable
 - (int)day
 {
 	return day;
 }
+
+/* the start method returns a date that is used for age calculation based on the month, day, and year assigned to variables of this class */
 - (NSDate*)start
 {
 
@@ -66,6 +75,7 @@
 	return start;
 }
 
+/* the following method releases the class from memory */
 - (void) dealloc
 {
 	[self setYear:0];

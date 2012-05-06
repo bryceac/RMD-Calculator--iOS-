@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2011 Bryce Campbell. All Rights Reserved.
+ */
 #import "RMD.h"
 #import "calcDate.h"
 @implementation RMD
@@ -16,45 +19,63 @@
 {
 	RMD* newRMD = [[RMD alloc] init]; // create instance or RMD
 	return [newRMD autorelease]; // release object and free memory
-}	
+}
+
+/* the setBD method takes a Date Object and sets it as the birth date */
 - (void)setBD:(NSDate*)b
 {
 	bd = b;
 }
+/* the setBal method sets the account balance */
 - (void)setBal:(double)c
 {
 	bal = c;
 }
+
+/* the setYear method sets the year of distribution */
 - (void)setYear:(int)y
 {
 	year = y;
 }
 
+/* the year method returns the year of distribution */
 - (int)year
 {
 	return year;
 }
 
+/* the bd method returns the birth date as a Date object */
 - (NSDate*)bd
 {
 	return bd;
 }
+
+/* the age method calculates a person's age and returns it */
 - (int)age
 {
-	calcDate* calc = [[calcDate alloc] init];
+	calcDate* calc = [[calcDate alloc] init]; // create instance of calcDate class
+    
+    // the following lines sets the starting date to December 31 of the year of distribution
 	[calc setYear:[self year]];
 	[calc setMonth:12];
 	[calc setDay:31];
 
-	NSTimeInterval seconds = [[calc start] timeIntervalSinceDate:[self bd]];
+	NSTimeInterval seconds = [[calc start] timeIntervalSinceDate:[self bd]]; // calculate person's age
 
+    // the following take the results of age calculation and converts the difference to years
 	int days = seconds/86400;
 	int age = days/365;
-    [calc release];
-	return age;
+    
+    [calc release]; // release calcDate class
+	return age; // return person's age
 }
+
+/* the rmd method returns rmd results based on a person's age */
 - (double)rmd
 {
+    /* the following takes the value of the balance variable and pairs it with the appropriate divisor, based on the person's age.
+    * the default statement runs a conditional statement that makes sure no results are returned for anyone below age 70, as well as makes sure anyone 115 or older has the same divisor.
+    */
 	switch([self age])
 	{
 		case 70: rmd = bal/27.4; break;
@@ -121,6 +142,8 @@
 	}
 	return rmd;
 }
+
+// the following free the class from memory
 - (void) dealloc
 {
 	[self setBD:nil];

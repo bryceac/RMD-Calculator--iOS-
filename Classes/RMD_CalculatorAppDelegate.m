@@ -22,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
+    
+    // the following sets the database path
     self.dbname = @"mrd.db";
     
     NSArray *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -38,6 +40,7 @@
     return YES;
 }
 
+// the createDB method creates the database to be used
 - (void)createDB
 {
     BOOL created;
