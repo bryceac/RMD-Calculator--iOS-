@@ -42,7 +42,6 @@
 - (IBAction)setYear;
 - (IBAction)setB;
 - (IBAction)saveData:(id)sender;
-- (IBAction)updateData:(id)sender;
 - (IBAction)loadData;
 @end
 

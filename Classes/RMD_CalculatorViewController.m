@@ -114,44 +114,7 @@
     [sf release];
     born = [mf stringFromDate:bdate];
     
-    if([db saveData:born :ira :distrib])
-    {
-        self.status.text = @"Save successful";
-    } else {
-        self.status.text = @"Could not save data";
-    }
-    [mf release];
-    [db release];
-    [nf release];
-}
-
-/* the updateData method updates the record that is found.
-* this was originally part of the saveData method, but in order to fix issues, it was made its own method.
-*/
-- (IBAction)updateData:(id)sender
-{
-    rmdSQL* db = [[rmdSQL alloc] init];
-    NSDateFormatter* sf = [[NSDateFormatter alloc] init];
-    [sf setDateFormat:@"MM/dd/yyyy"];
-    NSDateFormatter* mf = [[NSDateFormatter alloc] init];
-    [mf setDateFormat:@"yyyy-MM-dd"];
-    
-    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
-    [nf setPositiveFormat:@"#,###.##"];
-    [nf setNegativeFormat:@"#,###.##"];
-    
-    NSNumber* number = [nf numberFromString:self.bal.text];
-    
-    NSString* born = self.birth.text;
-    int distrib = self.year.text.intValue;
-    double ira = number.doubleValue;
-    
-    NSDate* bdate = [sf dateFromString:born];
-    [sf release];
-    born = [mf stringFromDate:bdate];
-    
-    // set the database path
-    if ([db records])
+    if ([db records] > 0) 
     {
         if([db updateData:born :ira :distrib])
         {
@@ -160,9 +123,13 @@
             self.status.text = @"Record could not be updated";
         }
     } else {
-        self.status.text = @"Cannot find any records";
+        if([db saveData:born :ira :distrib])
+        {
+            self.status.text = @"Save successful";
+        } else {
+            self.status.text = @"Could not save data";
+        }
     }
-    
     [mf release];
     [db release];
     [nf release];
