@@ -93,7 +93,7 @@
 	[retire release]; // release RMD class from memory
 }
 
-// the savedata method send input to SQLite for insertion
+// the savedata method sends input to SQLite for insertion or updating, if record exists
 - (IBAction)saveData:(id)sender
 {
     rmdSQL* db = [[rmdSQL alloc] init];
