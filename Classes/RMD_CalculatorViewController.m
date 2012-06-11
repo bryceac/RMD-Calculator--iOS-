@@ -29,6 +29,14 @@
 	return YES;
 }
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    if (item.tag == 0)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:brycecmpbell@gmail.com"]];
+    }
+}
+
 // display the year picker
 - (IBAction)displayYear
 {

@@ -24,6 +24,8 @@
 		551FE1E41549CF630054BBC0 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FE1E11549CF630054BBC0 /* FMDatabasePool.m */; };
 		551FE1E51549CF630054BBC0 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FE1E31549CF630054BBC0 /* FMDatabaseQueue.m */; };
 		551FE1E81549D5720054BBC0 /* DBPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FE1E71549D5720054BBC0 /* DBPath.m */; };
+		55297526158571FB007B8724 /* mailbox_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 55297525158571FB007B8724 /* mailbox_small.png */; };
+		5529752815857BDE007B8724 /* arrow_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5529752715857BDE007B8724 /* arrow_small.png */; };
 		5531CEC6153A7189002E8160 /* calcDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531CEC5153A7189002E8160 /* calcDate.m */; };
 		5531CEC9153A71BB002E8160 /* RMD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531CEC8153A71BB002E8160 /* RMD.m */; };
 		55C2ABB1153A76C20082D67C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */; };
@@ -57,6 +59,8 @@
 		551FE1E31549CF630054BBC0 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
 		551FE1E61549D5720054BBC0 /* DBPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPath.h; sourceTree = "<group>"; };
 		551FE1E71549D5720054BBC0 /* DBPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPath.m; sourceTree = "<group>"; };
+		55297525158571FB007B8724 /* mailbox_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailbox_small.png; sourceTree = "<group>"; };
+		5529752715857BDE007B8724 /* arrow_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_small.png; sourceTree = "<group>"; };
 		5531CEC4153A7189002E8160 /* calcDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calcDate.h; sourceTree = "<group>"; };
 		5531CEC5153A7189002E8160 /* calcDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calcDate.m; sourceTree = "<group>"; };
 		5531CEC7153A71BB002E8160 /* RMD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMD.h; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5529752715857BDE007B8724 /* arrow_small.png */,
+				55297525158571FB007B8724 /* mailbox_small.png */,
 				551A5BAB146208460038703A /* rmd_icon_114.png */,
 				551A5BA9146208400038703A /* rmd_icon_small.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -217,6 +223,8 @@
 				551A5BAA146208400038703A /* rmd_icon_small.png in Resources */,
 				551A5BAC146208460038703A /* rmd_icon_114.png in Resources */,
 				550D579E153C6622006170DE /* mrd.db in Resources */,
+				55297526158571FB007B8724 /* mailbox_small.png in Resources */,
+				5529752815857BDE007B8724 /* arrow_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
