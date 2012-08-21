@@ -55,7 +55,7 @@
     self.yt.hidden = YES;
     PrevYear* dYear = [[PrevYear alloc] init]; // create instance of PrevYear class
     [dYear setIYear:self.year.text]; // take year inputted as initial year
-    self.bal.placeholder = [NSString stringWithFormat:@"balance on 12/31/%d", [dYear prevYear]];
+    self.bal.placeholder = [NSString stringWithFormat:@"Balance on 12/31/%d", [dYear prevYear]];
     [dYear release];
     
 }
