@@ -3,7 +3,7 @@
 //  RMD Calculator
 //
 //  Created by Bryce Campbell on 8/21/12.
-//
+//  Copyright 2012 Bryce Campbell. All rights reserved.
 //
 
 #import "PrevYear.h"
