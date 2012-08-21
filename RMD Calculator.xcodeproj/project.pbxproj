@@ -28,6 +28,7 @@
 		5529752815857BDE007B8724 /* arrow_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 5529752715857BDE007B8724 /* arrow_small.png */; };
 		5531CEC6153A7189002E8160 /* calcDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531CEC5153A7189002E8160 /* calcDate.m */; };
 		5531CEC9153A71BB002E8160 /* RMD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531CEC8153A71BB002E8160 /* RMD.m */; };
+		55A4BAE515E42765001A1EBB /* PrevYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A4BAE415E42765001A1EBB /* PrevYear.m */; };
 		55C2ABB1153A76C20082D67C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		5531CEC5153A7189002E8160 /* calcDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calcDate.m; sourceTree = "<group>"; };
 		5531CEC7153A71BB002E8160 /* RMD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMD.h; sourceTree = "<group>"; };
 		5531CEC8153A71BB002E8160 /* RMD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMD.m; sourceTree = "<group>"; };
+		55A4BAE315E42765001A1EBB /* PrevYear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrevYear.h; sourceTree = "<group>"; };
+		55A4BAE415E42765001A1EBB /* PrevYear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrevYear.m; sourceTree = "<group>"; };
 		55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* RMD_Calculator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RMD_Calculator-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +110,8 @@
 				28D7ACF70DDB3853001CB0EB /* RMD_CalculatorViewController.m */,
 				55034D831543816E00AE59C9 /* rmdSQL.h */,
 				55034D841543816E00AE59C9 /* rmdSQL.m */,
+				55A4BAE315E42765001A1EBB /* PrevYear.h */,
+				55A4BAE415E42765001A1EBB /* PrevYear.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -192,7 +197,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "RMD Calculator" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -246,6 +251,7 @@
 				551FE1E41549CF630054BBC0 /* FMDatabasePool.m in Sources */,
 				551FE1E51549CF630054BBC0 /* FMDatabaseQueue.m in Sources */,
 				551FE1E81549D5720054BBC0 /* DBPath.m in Sources */,
+				55A4BAE515E42765001A1EBB /* PrevYear.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
