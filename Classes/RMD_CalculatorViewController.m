@@ -9,6 +9,7 @@
 #import "RMD_CalculatorViewController.h"
 #import "RMD.h"
 #import "rmdSQL.h"
+#import "PrevYear.h"
 
 @implementation RMD_CalculatorViewController
 @synthesize picker;
@@ -52,6 +53,10 @@
     self.year.text = choice;
     self.picker.hidden = YES;
     self.yt.hidden = YES;
+    PrevYear* dYear = [[PrevYear alloc] init]; // create instance of PrevYear class
+    [dYear setIYear:self.year.text]; // take year inputted as initial year
+    self.bal.placeholder = [NSString stringWithFormat:@"balance on 12/31/%d", [dYear prevYear]];
+    [dYear release];
     
 }
 
