@@ -11,16 +11,19 @@
 @interface alert : NSObject <UIAlertViewDelegate>
 {
     NSString *title, *message;
-    UIAlertView *alert;
+    UIAlertView *dialog;
+    BOOL *answer; // used to contain user button click;
 }
 
 // set up properties, in order to assign variables easily
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *message;
+@property (nonatomic, assign) BOOL *answer;
+@property (nonatomic, assign) UIAlertView *dialog;
 
 // create methods needed for class
 - (void)createDialog:(NSString*)t message:(NSString*)m question:(BOOL*)b; // method to create dialog
 - (void)show; // method to show dialog
 
-- (id) initWithTitle:(NSString*)t message:(NSString *)m andType:(Bool*)b; // initializer to quickly create dialogs
+- (id) initWithTitle:(NSString*)t message:(NSString *)m andType:(BOOL*)b; // initializer to quickly create dialogs
 @end
