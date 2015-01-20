@@ -32,6 +32,7 @@
 		55C2ABB1153A76C20082D67C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */; };
 		6CC71CF81A6ECF6100040E42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */; };
 		6CC71CFA1A6ED08A00040E42 /* apxml in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF91A6ED08A00040E42 /* apxml */; };
+		6CC71CFD1A6ED30800040E42 /* alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71CFC1A6ED30800040E42 /* alert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6CC71CF91A6ED08A00040E42 /* apxml */ = {isa = PBXFileReference; lastKnownFileType = folder; path = apxml; sourceTree = "<group>"; };
+		6CC71CFB1A6ED30800040E42 /* alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alert.h; sourceTree = "<group>"; };
+		6CC71CFC1A6ED30800040E42 /* alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alert.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RMD_Calculator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RMD_Calculator-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +120,8 @@
 				55034D841543816E00AE59C9 /* rmdSQL.m */,
 				55A4BAE315E42765001A1EBB /* PrevYear.h */,
 				55A4BAE415E42765001A1EBB /* PrevYear.m */,
+				6CC71CFB1A6ED30800040E42 /* alert.h */,
+				6CC71CFC1A6ED30800040E42 /* alert.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 				5531CEC6153A7189002E8160 /* calcDate.m in Sources */,
 				5531CEC9153A71BB002E8160 /* RMD.m in Sources */,
 				55034D851543816E00AE59C9 /* rmdSQL.m in Sources */,
+				6CC71CFD1A6ED30800040E42 /* alert.m in Sources */,
 				551FE1DD1549CF4A0054BBC0 /* FMDatabase.m in Sources */,
 				551FE1DE1549CF4A0054BBC0 /* FMResultSet.m in Sources */,
 				551FE1E41549CF630054BBC0 /* FMDatabasePool.m in Sources */,
