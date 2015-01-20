@@ -30,6 +30,7 @@
 		5531CEC9153A71BB002E8160 /* RMD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531CEC8153A71BB002E8160 /* RMD.m */; };
 		55A4BAE515E42765001A1EBB /* PrevYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A4BAE415E42765001A1EBB /* PrevYear.m */; };
 		55C2ABB1153A76C20082D67C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */; };
+		6CC71CF81A6ECF6100040E42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		55A4BAE315E42765001A1EBB /* PrevYear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrevYear.h; sourceTree = "<group>"; };
 		55A4BAE415E42765001A1EBB /* PrevYear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrevYear.m; sourceTree = "<group>"; };
 		55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RMD_Calculator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RMD_Calculator-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */,
 				5529752715857BDE007B8724 /* arrow_small.png */,
 				55297525158571FB007B8724 /* mailbox_small.png */,
 				551A5BAB146208460038703A /* rmd_icon_114.png */,
@@ -228,6 +231,7 @@
 				551A5BAA146208400038703A /* rmd_icon_small.png in Resources */,
 				551A5BAC146208460038703A /* rmd_icon_114.png in Resources */,
 				550D579E153C6622006170DE /* mrd.db in Resources */,
+				6CC71CF81A6ECF6100040E42 /* Default-568h@2x.png in Resources */,
 				55297526158571FB007B8724 /* mailbox_small.png in Resources */,
 				5529752815857BDE007B8724 /* arrow_small.png in Resources */,
 			);
