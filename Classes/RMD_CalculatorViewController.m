@@ -10,6 +10,8 @@
 #import "RMD.h"
 #import "rmdSQL.h"
 #import "PrevYear.h"
+#import "alert.h"
+#import "apxml/APXML.h"
 
 @implementation RMD_CalculatorViewController
 @synthesize picker;
@@ -106,8 +108,7 @@
 	[retire release]; // release RMD class from memory
 }
 
-// the savedata method sends input to SQLite for insertion or updating, if record exists
-- (IBAction)saveData:(id)sender
+- (BOOL)save
 {
     rmdSQL* db = [[rmdSQL alloc] init];
     NSDateFormatter* sf = [[NSDateFormatter alloc] init];
@@ -127,29 +128,38 @@
     [sf release];
     born = [mf stringFromDate:bdate];
     
-    if ([db records] > 0) 
+    if ([db records] > 0)
     {
         if([db updateData:born :ira :distrib])
         {
-            self.status.text = @"Record updated sucessfully";
+            [mf release];
+            [db release];
+            [nf release];
+            return true;
         } else {
-            self.status.text = @"Record could not be updated";
+            [mf release];
+            [db release];
+            [nf release];
+            return false;
         }
+
     } else {
         if([db saveData:born :ira :distrib])
         {
-            self.status.text = @"Save successful";
+            [mf release];
+            [db release];
+            [nf release];
+            return true;
         } else {
-            self.status.text = @"Could not save data";
+            [mf release];
+            [db release];
+            [nf release];
+            return false;
         }
     }
-    [mf release];
-    [db release];
-    [nf release];
 }
 
-// the loadData method retrieves data from SQLite database
-- (IBAction)loadData
+- (BOOL)load
 {
     rmdSQL* db = [[rmdSQL alloc] init];
     NSDateFormatter* bf = [[NSDateFormatter alloc] init];
@@ -161,9 +171,7 @@
     [nf setPositiveFormat:@"#,###.##"];
     [nf setNegativeFormat:@"#,###.##"];
     
-    
-    
-    if ([db records] > 0) 
+    if ([db records] > 0)
     {
         NSDate* birthdate = [df dateFromString:[db birth]];
         bd = [bf stringFromDate:birthdate];
@@ -179,6 +187,210 @@
         [bf release];
         [df release];
         [nf release];
+    }
+    return false;
+}
+
+// the savedata method sends input to SQLite for insertion or updating, if record exists
+- (IBAction)saveData:(id)sender
+{
+    alert *question = [[alert alloc] initWithTitle:@"Export to XML?" message:@"Do you want to save this as XML?" andType:true];
+    
+    [question show];
+    
+    if (question.answer)
+    {
+        if ([self exportXML])
+        {
+            self.status.text = @"Data exported to XML successfully.";
+        }
+    }
+    if ([self save])
+    {
+        self.status.text = @"Data was saved successfully";
+    }
+    else
+    {
+        self.status.text = @"Data could not be saved";
+    }
+}
+
+// the loadData method retrieves data from SQLite database
+- (IBAction)loadData
+{
+    alert *question = [[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true];
+    
+    [question show];
+    
+    if (question.answer)
+    {
+        if ([self importXML])
+        {
+            self.status.text = @"XML import was successful.";
+        }
+    }
+    else
+    {
+        if ([self load])
+        {
+            self.status.text = @"Data loaded successfully";
+        }
+        else
+        {
+            self.status.text = @"Data failed to load";
+        }
+}
+
+- (BOOL)exportXML
+{
+    // create variables needed to access documents directory and file
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *file = [NSString stringWithFormat:@"%@/rmd.xml", documentsDirectory];
+    
+    // create object to access sqlite and variables to parse data
+    rmdSQL* db = [[rmdSQL alloc] init];
+    NSDateFormatter* bf = [[NSDateFormatter alloc] init];
+    [bf setDateFormat:@"MM/dd/yyyy"];
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
+    
+    // create dialog for user interaction
+    alert *question = [[alert alloc] initWithTitle:@"Export from Database?" message:@"Do you want to export from Database?" andType:true];
+    
+    // create variable to hold xml
+    NSMutableString *xml = [NSMutableString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rmd>\r\n"];
+    
+    [question show]; // ask user where to get data from
+    
+    // check how user wanted to retrieve data and perform export
+    if (question.answer)
+    {
+        // make sure records exist in sqlite, otherwise pull from fields
+        if (db.records > 0)
+        {
+            [xml appendString:[NSString stringWithFormat:@"<birth>%@</birth>\r\n", [bf stringFromDate:[df dateFromString:db.birth]]]];
+            [xml appendString:[NSString stringWithFormat:@"<balance>%@</balance>\r\n", [nf stringFromNumber:[NSNumber numberWithDouble:db.bal]]]];
+            [xml appendString:[NSString stringWithFormat:@"<year>%d</year>\r\n", db.year]];
+        }
+        else
+        {
+            [xml appendString:[NSString stringWithFormat:@"<birth>%@</birth>\r\n", self.birth.text]];
+            [xml appendString:[NSString stringWithFormat:@"<balance>%@</balance>\r\n", self.bal.text]];
+            [xml appendString:[NSString stringWithFormat:@"<year>%@</year>\r\n", self.year.text]];
+        }
+        
+        [xml appendString:@"</rmd"];
+        
+        [xml writeToFile:file atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
+    }
+    else
+    {
+        [xml appendString:[NSString stringWithFormat:@"<birth>%@</birth>\r\n", self.birth.text]];
+        [xml appendString:[NSString stringWithFormat:@"<balance>%@</balance>\r\n", self.bal.text]];
+        [xml appendString:[NSString stringWithFormat:@"<year>%@</year>\r\n", self.year.text]];
+        [xml appendString:@"</rmd>"];
+        
+        [xml writeToFile:file atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
+    }
+    
+    // check if file exists and return true if it does
+    if ([[NSFileManager defaultManager] fileExistsAtPath:file])
+    {
+        [bf release];
+        [df release];
+        [nf release];
+        [question release];
+        return true;
+    }
+    
+    [bf release];
+    [df release];
+    [nf release];
+    [question release];
+    return false;
+}
+
+- (BOOL)importXML
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *file = [NSString stringWithFormat:@"%@/rmd.xml", documentsDirectory];
+    
+    rmdSQL* db = [[rmdSQL alloc] init];
+    NSDateFormatter* bf = [[NSDateFormatter alloc] init];
+    [bf setDateFormat:@"MM/dd/yyyy"];
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
+    
+    // check if file exists and import its contents
+    if ([[NSFileManager defaultManager] fileExistsAtPath:file])
+    {
+        NSString *xml = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:NULL];
+        APDocument *doc = [APDocument documentWithXMLString:xml];
+        
+        APElement *rootElement = [doc rootElement];
+        
+        NSArray *children = [rootElement childElements];
+        
+        for (APElement *child in children)
+        {
+            if ([child.name isEqualToString:@"birth"])
+            {
+                self.birth.text = child.value;
+            }
+            else if ([child.name isEqualToString:@"balance"])
+            {
+                self.bal.text = child.value;
+            }
+            else
+            {
+                self.year.text = child.value;
+            }
+        }
+        
+        alert *question = [[alert alloc] initWithTitle:@"Import to Database?" message:@"Do you want to save this to the Database?" andType:true];
+        
+        [question show];
+        
+        if (question.answer)
+        {
+            if ([self save])
+            {
+                [bf release];
+                [df release];
+                [nf release];
+                return true;
+            }
+            else
+            {
+                [bf release];
+                [df release];
+                [nf release];
+                [question release];
+                return false;
+            }
+            
+        }
+        else
+        {
+            [bf release];
+            [df release];
+            [nf release];
+            [question release];
+            return true;
+        }
+    } else {
+        [bf release];
+        [df release];
+        [nf release];
+        return false;
     }
 }
 
