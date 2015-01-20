@@ -108,7 +108,7 @@
 	[retire release]; // release RMD class from memory
 }
 
-- (BOOL)save
+- (BOOL*)save
 {
     rmdSQL* db = [[rmdSQL alloc] init];
     NSDateFormatter* sf = [[NSDateFormatter alloc] init];
@@ -159,7 +159,7 @@
     }
 }
 
-- (BOOL)load
+- (BOOL*)load
 {
     rmdSQL* db = [[rmdSQL alloc] init];
     NSDateFormatter* bf = [[NSDateFormatter alloc] init];
@@ -239,9 +239,10 @@
         {
             self.status.text = @"Data failed to load";
         }
+    }
 }
 
-- (BOOL)exportXML
+- (BOOL*)exportXML;
 {
     // create variables needed to access documents directory and file
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -314,7 +315,7 @@
     return false;
 }
 
-- (BOOL)importXML
+- (BOOL*)importXML
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
