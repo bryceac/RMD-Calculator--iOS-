@@ -1,0 +1,3 @@
+[submodule "Classes/apxml"]
+	path = Classes/apxml
+	url = https://github.com/arashpayan/apxml.git
