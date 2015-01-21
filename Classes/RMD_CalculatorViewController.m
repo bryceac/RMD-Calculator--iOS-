@@ -36,7 +36,7 @@
 {
     if (item.tag == 0)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:brycecmpbell@gmail.com"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:ios@brycecampbell.me"]];
     }
 }
 
@@ -397,7 +397,7 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	NSArray* array = [[NSArray alloc] initWithObjects:@"2011",@"2012",@"2013",@"2014",@"2015",@"2016",@"2017",@"2018",@"2019",nil];
+	NSArray* array = [[NSArray alloc] initWithObjects:@"2011",@"2012",@"2013",@"2014",@"2015",@"2016",@"2017",@"2018",@"2019",@"2020",@"2021",@"2022",@"2023",@"2024",@"2025",@"2026",@"2027",@"2028",nil];
 	NSDate* now = [NSDate date];
     [dpicker setDate:now];
     self.pickerArray = array;
