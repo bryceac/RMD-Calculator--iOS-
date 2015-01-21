@@ -194,7 +194,7 @@
 // the savedata method sends input to SQLite for insertion or updating, if record exists
 - (IBAction)saveData:(id)sender
 {
-    alert *question = [[alert alloc] initWithTitle:@"Export to XML?" message:@"Do you want to save this as XML?" andType:true];
+    alert *question = [[[alert alloc] initWithTitle:@"Export to XML?" message:@"Do you want to save this as XML?" andType:true] autorelease];
     
     [question show];
     
@@ -218,7 +218,7 @@
 // the loadData method retrieves data from SQLite database
 - (IBAction)loadData
 {
-    alert *question = [[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true];
+    alert *question = [[[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true] autorelease];
     
     [question show];
     
@@ -261,7 +261,7 @@
     [nf setNegativeFormat:@"#,###.##"];
     
     // create dialog for user interaction
-    alert *question = [[alert alloc] initWithTitle:@"Export from Database?" message:@"Do you want to export from Database?" andType:true];
+    alert *question = [[[alert alloc] initWithTitle:@"Export from Database?" message:@"Do you want to export from Database?" andType:true] autorelease];
     
     // create variable to hold xml
     NSMutableString *xml = [NSMutableString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rmd>\r\n"];
@@ -322,7 +322,6 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *file = [NSString stringWithFormat:@"%@/rmd.xml", documentsDirectory];
     
-    rmdSQL* db = [[rmdSQL alloc] init];
     NSDateFormatter* bf = [[NSDateFormatter alloc] init];
     [bf setDateFormat:@"MM/dd/yyyy"];
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
@@ -357,7 +356,7 @@
             }
         }
         
-        alert *question = [[alert alloc] initWithTitle:@"Import to Database?" message:@"Do you want to save this to the Database?" andType:true];
+        alert *question = [[[alert alloc] initWithTitle:@"Import to Database?" message:@"Do you want to save this to the Database?" andType:true] autorelease];
         
         [question show];
         
