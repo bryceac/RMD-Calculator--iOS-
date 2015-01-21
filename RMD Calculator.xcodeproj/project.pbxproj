@@ -30,6 +30,7 @@
 		5531CEC9153A71BB002E8160 /* RMD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531CEC8153A71BB002E8160 /* RMD.m */; };
 		55A4BAE515E42765001A1EBB /* PrevYear.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A4BAE415E42765001A1EBB /* PrevYear.m */; };
 		55C2ABB1153A76C20082D67C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */; };
+		6C6463DE1A7045A400BA1685 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6463DD1A7045A400BA1685 /* libxml2.dylib */; };
 		6CC71CF81A6ECF6100040E42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */; };
 		6CC71CFA1A6ED08A00040E42 /* apxml in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF91A6ED08A00040E42 /* apxml */; };
 		6CC71CFD1A6ED30800040E42 /* alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71CFC1A6ED30800040E42 /* alert.m */; };
@@ -72,6 +73,7 @@
 		55A4BAE315E42765001A1EBB /* PrevYear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrevYear.h; sourceTree = "<group>"; };
 		55A4BAE415E42765001A1EBB /* PrevYear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrevYear.m; sourceTree = "<group>"; };
 		55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		6C6463DD1A7045A400BA1685 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6CC71CF91A6ED08A00040E42 /* apxml */ = {isa = PBXFileReference; lastKnownFileType = folder; path = apxml; sourceTree = "<group>"; };
 		6CC71CFB1A6ED30800040E42 /* alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alert.h; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C6463DE1A7045A400BA1685 /* libxml2.dylib in Frameworks */,
 				55C2ABB1153A76C20082D67C /* libsqlite3.0.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -174,6 +177,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C6463DD1A7045A400BA1685 /* libxml2.dylib */,
 				55C2ABB0153A76C20082D67C /* libsqlite3.0.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
