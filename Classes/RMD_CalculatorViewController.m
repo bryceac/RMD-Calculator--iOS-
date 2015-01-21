@@ -198,12 +198,6 @@
     
     [question show];
     
-    // add loop that is necessary to make sure app waits for user input
-    while (!question.dialog.hidden && question.dialog.superview != nil)
-    {
-        [[NSRunLoop currentRunLoop] limitDateForMode:NSDefaultRunLoopMode];
-    }
-    
     if (question.answer)
     {
         if ([self exportXML])
@@ -227,12 +221,6 @@
     alert *question = [[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true];
     
     [question show];
-    
-    // add loop that is necessary to make sure app waits for user input
-    while (!question.dialog.hidden && question.dialog.superview != nil)
-    {
-        [[NSRunLoop currentRunLoop] limitDateForMode:NSDefaultRunLoopMode];
-    }
     
     // check user input and perform code based on it
     if (question.answer)
@@ -279,12 +267,6 @@
     NSMutableString *xml = [NSMutableString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rmd>\r\n"];
     
     [question show]; // ask user where to get data from
-    
-    // add loop that is necessary to make sure app waits for user input
-    while (!question.dialog.hidden && question.dialog.superview != nil)
-    {
-        [[NSRunLoop currentRunLoop] limitDateForMode:NSDefaultRunLoopMode];
-    }
     
     // check how user wanted to retrieve data and perform export
     if (question.answer)
@@ -376,12 +358,6 @@
         }
         
         alert *question = [[alert alloc] initWithTitle:@"Import to Database?" message:@"Do you want to save this to the Database?" andType:true];
-        
-        // add loop that is necessary to make sure app waits for user input
-        while (!question.dialog.hidden && question.dialog.superview != nil)
-        {
-            [[NSRunLoop currentRunLoop] limitDateForMode:NSDefaultRunLoopMode];
-        }
         
         [question show];
         
