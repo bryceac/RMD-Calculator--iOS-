@@ -25,5 +25,6 @@
 - (void)createDialog:(NSString*)t message:(NSString*)m question:(BOOL*)b; // method to create dialog
 - (void)show; // method to show dialog
 
+
 - (id) initWithTitle:(NSString*)t message:(NSString *)m andType:(BOOL*)b; // initializer to quickly create dialogs
 @end
