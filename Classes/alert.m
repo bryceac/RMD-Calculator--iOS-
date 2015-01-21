@@ -37,6 +37,12 @@
 - (void)show
 {
     [[self dialog] show];
+    
+    // loop to delay code execution, so user can give input.
+    while (self.dialog.hidden == NO && self.dialog.superview != nil)
+    {
+        [[NSRunLoop currentRunLoop] limitDateForMode:NSDefaultRunLoopMode];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
