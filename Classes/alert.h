@@ -10,21 +10,29 @@
 
 @interface alert : NSObject <UIAlertViewDelegate>
 {
-    NSString *title, *message;
+    NSString *title, *message, *birth;
+    int year;
+    double balance;
     UIAlertView *dialog;
-    BOOL *answer; // used to contain user button click;
+    UITextField *born, *amount, *era;
 }
 
 // set up properties, in order to assign variables easily
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *message;
-@property (nonatomic, assign) BOOL *answer;
+@property (nonatomic, retain) NSString *title, *message, *birth;
+@property (assign) int year;
+@property (assign) double balance;
+@property (nonatomic, retain) UITextField *born, *amount, *era;
 @property (nonatomic, assign) UIAlertView *dialog;
 
 // create methods needed for class
-- (void)createDialog:(NSString*)t message:(NSString*)m question:(BOOL*)b; // method to create dialog
+- (void)createMessageDialog:(NSString*)t message:(NSString*)m; // method to create message dialog
+- (void)createSaveDialog:(NSString*)t :(NSString*)m :(NSString*)birth :(double)balance :(int)year; // method to create save dialog
+- (void)createLoadDialog:(NSString*)t :(NSString*)m :(UITextField*)birth :(UITextField*)balance :(UITextField*)year; // message to create load dialog
 - (void)show; // method to show dialog
 
+// initialization methods
+- (id) initWithTitle:(NSString*)t message:(NSString *)m; // initializer to quickly create message dialogs
+- (id) initLoadWithContent:(NSString*)t message:(NSString *)m :(UITextField*)birth :(UITextField*)balance :(UITextField*)year;
+- (id) initSaveWithContent:(NSString*)t message:(NSString *)m :(NSString*)birth :(double)balance :(int)year;
 
-- (id) initWithTitle:(NSString*)t message:(NSString *)m andType:(BOOL*)b; // initializer to quickly create dialogs
 @end
