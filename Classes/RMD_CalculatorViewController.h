@@ -41,13 +41,5 @@
 - (IBAction)setB;
 - (IBAction)saveData:(id)sender;
 - (IBAction)loadData;
-
-// method to simplify saving and load to use new functionality
-- (BOOL*)save;
-- (BOOL*)load;
-
-// methods for file export
-- (BOOL*)exportXML;
-- (BOOL*)importXML;
 @end
 

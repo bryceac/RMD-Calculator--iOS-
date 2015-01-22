@@ -107,16 +107,6 @@
 	[retire release]; // release RMD class from memory
 }
 
-// method used to save to database.
-- (BOOL*)save
-{
-}
-
-// method used to load from database.
-- (BOOL*)load
-{
-}
-
 // the savedata method saves user input to either an XML file or the database at user's choice
 - (IBAction)saveData:(id)sender
 {
@@ -201,14 +191,6 @@
             // self.status.text = @"Data failed to load";
         }
     }
-}
-
-- (BOOL*)exportXML;
-{
-}
-
-- (BOOL*)importXML
-{
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
