@@ -27,11 +27,11 @@
 {
     if (b == false)
     {
-        self.dialog = [[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
     }
     else
     {
-        self.dialog = [[UIAlertView alloc] initWithTitle:t message:m delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil];
+        self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil] autorelease];
     }
 }
 
@@ -65,7 +65,6 @@
     self.title = nil;
     self.message = nil;
     self.answer = nil;
-    [[self dialog] release];
     [super dealloc];
 }
 
