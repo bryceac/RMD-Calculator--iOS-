@@ -114,7 +114,7 @@
     [nf setPositiveFormat:@"#,###.##"];
     [nf setNegativeFormat:@"#,###.##"];
     
-    // display dialog asking how to save data. Values are passed, so that XML can still be created if a database cannot be used
+    // display dialog asking how to save data. Values are passed, so that XML can be created from the app before grabbing data from the database
     alert *question = [[[alert alloc] initSaveWithContent:@"Save As XML?" message:@"Do you want to export data to XML?" :self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue] autorelease];
     
     [question show];

@@ -95,17 +95,20 @@
     Data *data = [[[Data alloc] init] autorelease];
     UIAlertView *status;
     
+    // check type of dialog used and take appropiate actions
     if (alertView.tag == SaveDialog)
     {
+        // if dialog is a save dialog, check user selection for whether or not they want xml
         if ([text isEqualToString:@"Yes"])
         {
-            if ([data DBXML]) {
-                status = [[[UIAlertView alloc] initWithTitle:@"Database XML Export Successful" message:@"Data was successfully saved to XML from the database" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
-            }
-            else if ([data XMLSave:self.birth :self.balance :self.year])
+            // try to create XML from app, before resorting to database
+            if ([data XMLSave:self.birth :self.balance :self.year])
             {
                 status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data from app was successfully saved to XML" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show];
+            }
+            else if ([data DBXML]) {
+                status = [[[UIAlertView alloc] initWithTitle:@"Database XML Export Successful" message:@"Data was successfully saved to XML from the database" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
                 [status show];
             }
             else
