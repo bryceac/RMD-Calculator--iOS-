@@ -26,13 +26,13 @@
 
 // create methods needed for class
 - (void)createMessageDialog:(NSString*)t message:(NSString*)m; // method to create message dialog
-- (void)createSaveDialog:(NSString*)t :(NSString*)m :(NSString*)birth :(double)balance :(int)year; // method to create save dialog
-- (void)createLoadDialog:(NSString*)t :(NSString*)m :(UITextField*)birth :(UITextField*)balance :(UITextField*)year; // message to create load dialog
+- (void)createSaveDialog:(NSString*)t :(NSString*)m :(NSString*)b :(double)a :(int)y; // method to create save dialog
+- (void)createLoadDialog:(NSString*)t :(NSString*)m :(UITextField*)b :(UITextField*)a :(UITextField*)y; // message to create load dialog
 - (void)show; // method to show dialog
 
 // initialization methods
 - (id) initWithTitle:(NSString*)t message:(NSString *)m; // initializer to quickly create message dialogs
-- (id) initLoadWithContent:(NSString*)t message:(NSString *)m :(UITextField*)birth :(UITextField*)balance :(UITextField*)year;
-- (id) initSaveWithContent:(NSString*)t message:(NSString *)m :(NSString*)birth :(double)balance :(int)year;
+- (id) initLoadWithContent:(NSString*)t message:(NSString *)m :(UITextField*)b :(UITextField*)a :(UITextField*)y;
+- (id) initSaveWithContent:(NSString*)t message:(NSString *)m :(NSString*)b :(double)a :(int)y;
 
 @end

@@ -14,24 +14,66 @@
 @implementation alert
 @synthesize title, message, dialog, birth, born, balance, amount, year, era;
 
-- (id) initWithTitle:(NSString *)t message:(NSString *)m andType:(BOOL*)b
+- (id) initWithTitle:(NSString *)t message:(NSString *)m
 {
     if (self = [super init])
     {
         self.title = t;
         self.message = m;
-        [self createMessageDialog:self.title message:self.message question:b];
+        self.birth = nil;
+        self.balance = 0;
+        self.year = 0;
+        self.born = nil;
+        self.amount = nil;
+        self.era = nil;
+        [self createMessageDialog:self.title message:self.message];
     }
     return self;
 }
 
-- (void)createMessageDialog:(NSString *)t message:(NSString *)m question:(BOOL *)b
+- (id) initSaveWithContent:(NSString *)t message:(NSString *)m :(NSString *)b :(double)a :(int)y
+{
+    if (self = [super init])
+    {
+        self.title = t;
+        self.message = m;
+        self.birth = b;
+        self.balance = a;
+        self.year = y;
+        self.born = nil;
+        self.amount = nil;
+        self.era = nil;
+        [self createSaveDialog:self.title :self.message :self.birth :self.balance :self.year];
+    }
+    return self;
+}
+
+- (id) initLoadWithContent:(NSString *)t message:(NSString *)m :(UITextField *)b :(UITextField *)a :(UITextField *)y
+{
+    if (self = [super init])
+    {
+        self.title = t;
+        self.message = m;
+        self.birth = nil;
+        self.balance = 0;
+        self.year = 0;
+        self.born = b;
+        self.amount = a;
+        self.era = y;
+        [self createLoadDialog:self.title :self.message :self.born :self.amount :self.era];
+    }
+    return self;
+    
+}
+
+- (void)createMessageDialog:(NSString *)t message:(NSString *)m
 {
         self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
 }
 
-- (void)createSaveDialog:(NSString *)t :(NSString *)m :(NSString *)birth :(double)balance :(int)year
+- (void)createSaveDialog:(NSString *)t :(NSString *)m :(NSString *)b :(double)a :(int)y
 {
+    
     self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
     self.dialog.tag = SaveDialog;
 }
@@ -132,6 +174,13 @@
 {
     self.title = nil;
     self.message = nil;
+    self.dialog = nil;
+    self.birth = nil;
+    self.balance = 0;
+    self.year = 0;
+    self.born = nil;
+    self.amount = nil;
+    self.era = nil;
     [super dealloc];
 }
 
