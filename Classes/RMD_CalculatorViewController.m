@@ -107,90 +107,20 @@
 	[retire release]; // release RMD class from memory
 }
 
-// the savedata method saves user input to either an XML file or the database at user's choice
+// the savedata method displays alert view that handles saving data
 - (IBAction)saveData:(id)sender
 {
-    alert *status;
     alert *question = [[[alert alloc] initWithTitle:@"Export to XML?" message:@"Do you want to save this as XML?" andType:true] autorelease];
     
     [question show];
-    
-    if (question.answer)
-    {
-        if ([self exportXML])
-        {
-            status = [[[alert alloc] initWithTitle:@"XML Export Successful" message:@"Data exported to XML successfully." andType:false] autorelease];
-            
-            [status show];
-            // self.status.text = @"Data exported to XML successfully.";
-        }
-        else
-        {
-            status = [[[alert alloc] initWithTitle:@"XML Export Failed" message:@"Unable to export XML." andType:false] autorelease];
-            
-            [status show];
-        }
-    }
-    else
-    {
-        if ([self save])
-        {
-        status = [[[alert alloc] initWithTitle:@"Record Saved Successfully" message:@"Data was saved to database successfully." andType:false] autorelease];
-        
-        [status show];
-        // self.status.text = @"Data was saved successfully";
-        }
-        else
-        {
-            status = [[[alert alloc] initWithTitle:@"Failed to Save Data" message:@"Data could not be saved" andType:false] autorelease];
-            
-            [status show];
-        }
-    }
 }
 
-// the loadData method retrieves database from xml or database according to user's choice
+// the loadData method displays alert view that will handle loading data.
 - (IBAction)loadData
 {
-    alert *status;
     alert *question = [[[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true] autorelease];
     
     [question show];
-    
-    // check user input and perform code based on it
-    if (question.answer)
-    {
-        if ([self importXML])
-        {
-            status = [[[alert alloc] initWithTitle:@"XML Import Successful" message:@"Data successfully retrieved from XML." andType:false] autorelease];
-            
-            [status show];
-            // self.status.text = @"XML import was successful.";
-        }
-        else
-        {
-            status = [[[alert alloc] initWithTitle:@"XML Import Failed" message:@"Unable to import from XML." andType:false] autorelease];
-            
-            [status show];
-        }
-    }
-    else
-    {
-        if ([self load])
-        {
-            status = [[[alert alloc] initWithTitle:@"Database Import Successful" message:@"Data loaded sucessfully." andType:false] autorelease];
-            
-            [status show];
-            // self.status.text = @"Data loaded successfully";
-        }
-        else
-        {
-            status = [[[alert alloc] initWithTitle:@"Database Import Failed" message:@"Unable to load from database." andType:false] autorelease];
-            
-            [status show];
-            // self.status.text = @"Data failed to load";
-        }
-    }
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
