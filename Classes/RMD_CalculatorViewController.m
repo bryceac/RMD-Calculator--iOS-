@@ -194,6 +194,7 @@
 // the savedata method sends input to SQLite for insertion or updating, if record exists
 - (IBAction)saveData:(id)sender
 {
+    alert *status;
     alert *question = [[[alert alloc] initWithTitle:@"Export to XML?" message:@"Do you want to save this as XML?" andType:true] autorelease];
     
     [question show];
