@@ -18,6 +18,7 @@
         self.title = t;
         self.message = m;
         [self createDialog:self.title message:self.message question:b];
+        self.answer = nil;
     }
     return self;
 }
@@ -63,6 +64,7 @@
 {
     self.title = nil;
     self.message = nil;
+    self.answer = nil;
     [[self dialog] release];
     [super dealloc];
 }
