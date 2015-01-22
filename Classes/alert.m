@@ -74,13 +74,13 @@
 - (void)createSaveDialog:(NSString *)t :(NSString *)m :(NSString *)b :(double)a :(int)y
 {
     
-    self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+    self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil] autorelease];
     self.dialog.tag = SaveDialog;
 }
 
 - (void)createLoadDialog:(NSString *)t :(NSString *)m :(UITextField *)birth :(UITextField *)balance :(UITextField *)year
 {
-    self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+    self.dialog = [[[UIAlertView alloc] initWithTitle:t message:m delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil] autorelease];
     self.dialog.tag = LoadDialog;
 }
 
