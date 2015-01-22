@@ -48,7 +48,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString *text = [self.dialog buttonTitleAtIndex:buttonIndex];
+    NSString *text = [alertView buttonTitleAtIndex:buttonIndex];
     
     if ([text isEqualToString:@"Yes"])
     {
