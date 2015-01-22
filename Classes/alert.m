@@ -112,7 +112,16 @@
         }
         else if ([text isEqualToString:@"No"])
         {
-            
+            if ([data DBLoad:self.born :self.amount :self.era])
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was successfully loaded from database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show];
+            }
+            else
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Unable to load data from Database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show];
+            }
         }
         else;
     }
