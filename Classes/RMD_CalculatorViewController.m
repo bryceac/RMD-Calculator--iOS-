@@ -107,6 +107,7 @@
 	[retire release]; // release RMD class from memory
 }
 
+// method used to save to database.
 - (BOOL*)save
 {
     rmdSQL* db = [[rmdSQL alloc] init];
@@ -158,6 +159,7 @@
     }
 }
 
+// method used to load from database.
 - (BOOL*)load
 {
     rmdSQL* db = [[rmdSQL alloc] init];
@@ -189,7 +191,7 @@
     return false;
 }
 
-// the savedata method sends input to SQLite for insertion or updating, if record exists
+// the savedata method saves user input to either an XML file or the database at user's choice
 - (IBAction)saveData:(id)sender
 {
     alert *status;
@@ -231,7 +233,7 @@
     }
 }
 
-// the loadData method retrieves data from SQLite database
+// the loadData method retrieves database from xml or database according to user's choice
 - (IBAction)loadData
 {
     alert *status;
