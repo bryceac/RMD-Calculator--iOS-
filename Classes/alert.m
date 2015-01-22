@@ -134,10 +134,12 @@
     }
     else if (alertView.tag == LoadDialog)
     {
+        // if dialog is a load dialog, check whether user wants to import from XML
         if ([text isEqualToString:@"Yes"])
         {
             if ([data XMLLoad:self.born :self.amount :self.era])
             {
+                // if XML was loaded successfully, attempt to save the data to the database too
                 if ([data DBSave:self.born.text :self.amount.text.doubleValue :self.era.text.intValue])
                 {
                     status = [[[UIAlertView alloc] initWithTitle:@"Data Imported Successfully" message:@"Data was successfully imported via XML and is saved in the database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
