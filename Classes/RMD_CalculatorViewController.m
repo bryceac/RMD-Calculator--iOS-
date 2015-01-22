@@ -110,15 +110,22 @@
 // the savedata method displays alert view that handles saving data
 - (IBAction)saveData:(id)sender
 {
-    alert *question = [[[alert alloc] initWithTitle:@"Export to XML?" message:@"Do you want to save this as XML?" andType:true] autorelease];
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
+    
+    // display dialog asking how to save data. Values are passed, so that XML can still be created if a database cannot be used
+    alert *question = [[[alert alloc] initSaveWithContent:@"Save As XML?" message:@"Do you want to export data to XML?" :self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue] autorelease];
     
     [question show];
+    [nf release];
 }
 
 // the loadData method displays alert view that will handle loading data.
 - (IBAction)loadData
 {
-    alert *question = [[[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true] autorelease];
+    // display dialog asking if user wants to load data from XML. UITextfield objects are passed, in order to populate view
+    alert *question = [[[alert alloc] initLoadWithContent:@"Load from XML?" message:@"Do you want to import data from XML?" :self.birth :self.bal :self.year] autorelease];
     
     [question show];
 }
