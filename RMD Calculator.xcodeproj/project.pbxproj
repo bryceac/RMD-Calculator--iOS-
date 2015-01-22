@@ -36,6 +36,7 @@
 		6C6463DE1A7045A400BA1685 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6463DD1A7045A400BA1685 /* libxml2.dylib */; };
 		6CC71CF81A6ECF6100040E42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */; };
 		6CC71CFD1A6ED30800040E42 /* alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC71CFC1A6ED30800040E42 /* alert.m */; };
+		6CEFC41B1A718DD500347CAA /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEFC41A1A718DD500347CAA /* Data.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,8 @@
 		6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6CC71CFB1A6ED30800040E42 /* alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alert.h; sourceTree = "<group>"; };
 		6CC71CFC1A6ED30800040E42 /* alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alert.m; sourceTree = "<group>"; };
+		6CEFC4191A718DD500347CAA /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Data.h; sourceTree = "<group>"; };
+		6CEFC41A1A718DD500347CAA /* Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Data.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RMD_Calculator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RMD_Calculator-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +142,8 @@
 				55A4BAE415E42765001A1EBB /* PrevYear.m */,
 				6CC71CFB1A6ED30800040E42 /* alert.h */,
 				6CC71CFC1A6ED30800040E42 /* alert.m */,
+				6CEFC4191A718DD500347CAA /* Data.h */,
+				6CEFC41A1A718DD500347CAA /* Data.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				551FE1E81549D5720054BBC0 /* DBPath.m in Sources */,
 				55A4BAE515E42765001A1EBB /* PrevYear.m in Sources */,
 				6C0BD31D1A7049720003FF20 /* APAttribute.m in Sources */,
+				6CEFC41B1A718DD500347CAA /* Data.m in Sources */,
 				6C0BD31E1A7049720003FF20 /* APDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
