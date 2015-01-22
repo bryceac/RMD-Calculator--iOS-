@@ -23,7 +23,6 @@
 @synthesize yt;
 @synthesize dt;
 @synthesize dpicker;
-@synthesize status;
 
 /* the following hides the keyboard when the user says done */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -181,9 +180,8 @@
         self.bal.text = [nf stringFromNumber:[NSNumber numberWithDouble:[db bal]]];
         [nf release];
         self.year.text = [NSString stringWithFormat:@"%d", [db year]];
-        self.status.text = @"All data loaded successfully";
+        return true;
     } else {
-        self.status.text = @"Could not load data because no records exist.";
         [bf release];
         [df release];
         [nf release];
@@ -203,22 +201,40 @@
     {
         if ([self exportXML])
         {
-            self.status.text = @"Data exported to XML successfully.";
+            status = [[[alert alloc] initWithTitle:@"XML Export Successful" message:@"Data exported to XML successfully." andType:false] autorelease];
+            
+            [status show];
+            // self.status.text = @"Data exported to XML successfully.";
         }
-    }
-    if ([self save])
-    {
-        self.status.text = @"Data was saved successfully";
+        else
+        {
+            status = [[[alert alloc] initWithTitle:@"XML Export Failed" message:@"Unable to export XML." andType:false] autorelease];
+            
+            [status show];
+        }
     }
     else
     {
-        self.status.text = @"Data could not be saved";
+        if ([self save])
+        {
+        status = [[[alert alloc] initWithTitle:@"Record Saved Successfully" message:@"Data was saved to database successfully." andType:false] autorelease];
+        
+        [status show];
+        // self.status.text = @"Data was saved successfully";
+        }
+        else
+        {
+            status = [[[alert alloc] initWithTitle:@"Failed to Save Data" message:@"Data could not be saved" andType:false] autorelease];
+            
+            [status show];
+        }
     }
 }
 
 // the loadData method retrieves data from SQLite database
 - (IBAction)loadData
 {
+    alert *status;
     alert *question = [[[alert alloc] initWithTitle:@"Import from XML?" message:@"Do you have an XML you want to import?" andType:true] autorelease];
     
     [question show];
@@ -228,18 +244,33 @@
     {
         if ([self importXML])
         {
-            self.status.text = @"XML import was successful.";
+            status = [[[alert alloc] initWithTitle:@"XML Import Successful" message:@"Data successfully retrieved from XML." andType:false] autorelease];
+            
+            [status show];
+            // self.status.text = @"XML import was successful.";
+        }
+        else
+        {
+            status = [[[alert alloc] initWithTitle:@"XML Import Failed" message:@"Unable to import from XML." andType:false] autorelease];
+            
+            [status show];
         }
     }
     else
     {
         if ([self load])
         {
-            self.status.text = @"Data loaded successfully";
+            status = [[[alert alloc] initWithTitle:@"Database Import Successful" message:@"Data loaded sucessfully." andType:false] autorelease];
+            
+            [status show];
+            // self.status.text = @"Data loaded successfully";
         }
         else
         {
-            self.status.text = @"Data failed to load";
+            status = [[[alert alloc] initWithTitle:@"Database Import Failed" message:@"Unable to load from database." andType:false] autorelease];
+            
+            [status show];
+            // self.status.text = @"Data failed to load";
         }
     }
 }
@@ -408,7 +439,6 @@
     self.picker.dataSource = self;
     self.dt.hidden = YES;
     self.dpicker.hidden = YES;
-    self.status.text = nil;
 	[array release];
     [super viewDidLoad];
 }
