@@ -14,6 +14,7 @@
     int year;
     double balance;
     UIAlertView *dialog;
+    BOOL* answer;
     UITextField *born, *amount, *era;
 }
 
@@ -23,6 +24,7 @@
 @property (assign) double balance;
 @property (nonatomic, retain) UITextField *born, *amount, *era;
 @property (nonatomic, assign) UIAlertView *dialog;
+@property (assign) BOOL* answer;
 
 // create methods needed for class
 - (void)createMessageDialog:(NSString*)t message:(NSString*)m; // method to create message dialog

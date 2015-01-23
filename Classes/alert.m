@@ -12,7 +12,7 @@
 #define LoadDialog 2
 
 @implementation alert
-@synthesize title, message, dialog, birth, born, balance, amount, year, era;
+@synthesize title, message, dialog, birth, born, balance, amount, year, era, answer;
 
 - (id) initWithTitle:(NSString *)t message:(NSString *)m
 {
@@ -104,30 +104,35 @@
             // try to create XML from app, before resorting to database
             if ([data XMLSave:self.birth :self.balance :self.year])
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data from app was successfully saved to XML" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = true;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data from app was successfully saved to XML" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
             else if ([data DBXML]) {
-                status = [[[UIAlertView alloc] initWithTitle:@"Database XML Export Successful" message:@"Data was successfully saved to XML from the database" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = true;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"Database XML Export Successful" message:@"Data was successfully saved to XML from the database" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
             else
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"XML Export Failed" message:@"Sorry, Data could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = false;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"XML Export Failed" message:@"Sorry, Data could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
         }
         else if ([text isEqualToString:@"No"])
         {
             if ([data DBSave:self.birth :self.balance :self.year])
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"Data Saved Successfully" message:@"Data was successfully saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = true;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"Data Saved Successfully" message:@"Data was successfully saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
             else
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Saved" message:@"Sorry, Data was unable to be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = false;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Saved" message:@"Sorry, Data was unable to be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
         }
         else;
@@ -142,32 +147,37 @@
                 // if XML was loaded successfully, attempt to save the data to the database too
                 if ([data DBSave:self.born.text :self.amount.text.doubleValue :self.era.text.intValue])
                 {
-                    status = [[[UIAlertView alloc] initWithTitle:@"Data Imported Successfully" message:@"Data was successfully imported via XML and is saved in the database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                    [status show];
+                    self.answer = true;
+                    /* status = [[[UIAlertView alloc] initWithTitle:@"Data Imported Successfully" message:@"Data was successfully imported via XML and is saved in the database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                    [status show]; */
                 }
                 else
                 {
-                    status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was loaded successfully, but you may need to save the data yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                    [status show];
+                    self.answer = true;
+                    /* status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was loaded successfully, but you may need to save the data yourself." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                    [status show]; */
                 }
             }
             else
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Data could not be found because XML file either does not exist or cannot be read." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = false;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Data could not be found because XML file either does not exist or cannot be read." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
         }
         else if ([text isEqualToString:@"No"])
         {
             if ([data DBLoad:self.born :self.amount :self.era])
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was successfully loaded from database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = true;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was successfully loaded from database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
             else
             {
-                status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Unable to load data from Database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-                [status show];
+                self.answer = false;
+                /* status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Unable to load data from Database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                [status show]; */
             }
         }
         else;
