@@ -119,6 +119,17 @@
     
     [question show];
     [nf release];
+    
+    if (question.answer)
+    {
+        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Saved Successfully" message:@"Data was saved successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+        [status show];
+    }
+    else
+    {
+        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Save" message:@"Data failed to save." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+        [status show];
+    }
 }
 
 // the loadData method displays alert view that will handle loading data.
@@ -128,6 +139,17 @@
     alert *question = [[[alert alloc] initLoadWithContent:@"Load from XML?" message:@"Do you want to import data from XML?" :self.birth :self.bal :self.year] autorelease];
     
     [question show];
+    
+    if (question.answer)
+    {
+        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was loaded successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+        [status show];
+    }
+    else
+    {
+        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Data could not be loaded." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+        [status show];
+    }
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
