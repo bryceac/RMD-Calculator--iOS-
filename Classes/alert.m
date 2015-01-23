@@ -93,7 +93,6 @@
 {
     NSString *text = [alertView buttonTitleAtIndex:buttonIndex];
     Data *data = [[[Data alloc] init] autorelease];
-    UIAlertView *status;
     
     // check type of dialog used and take appropiate actions
     if (alertView.tag == SaveDialog)
