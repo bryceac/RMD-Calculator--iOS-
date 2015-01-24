@@ -164,6 +164,9 @@
 - (IBAction)loadData
 {
     __block UIAlertView *status = nil;
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setPositiveFormat:@"#,###.##"];
+    [nf setNegativeFormat:@"#,###.##"];
     Data *data = [[[Data alloc] init] autorelease];
     
     UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Load from XML?" message:@"Do you want to load from XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
@@ -188,9 +191,19 @@
     }
                 cancelBlock:^{
                     if ([data XMLLoad:self.birth :self.bal :self.year]) {
-                        status = [[[UIAlertView alloc] initWithTitle:@"Import Successful" message:@"Data imported from XML successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
                         
-                        [status show];
+                        if ([data DBSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue])
+                        {
+                            status = [[[UIAlertView alloc] initWithTitle:@"Import Successful" message:@"Data imported from XML successfully and was saved to database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                            
+                            [status show];
+                        }
+                        else
+                        {
+                            status = [[[UIAlertView alloc] initWithTitle:@"Import Successful" message:@"Data imported from XML successfully, but you might need to manually save to the database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                            
+                            [status show];
+                        }
                     }
                     else
                     {
@@ -199,6 +212,8 @@
                         [status show];
                     }
                 }];
+    
+    [nf release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
