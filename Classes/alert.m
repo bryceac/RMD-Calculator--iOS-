@@ -87,6 +87,7 @@
 - (void)show
 {
     [[self dialog] show];
+    [[self dialog] retain];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
