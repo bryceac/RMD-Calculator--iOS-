@@ -10,8 +10,9 @@
 #import "RMD.h"
 #import "rmdSQL.h"
 #import "PrevYear.h"
-#import "alert.h"
 #import "APXML.h"
+#import "UIAlertView+Blocks.h"
+#import "Data.h"
 
 @implementation RMD_CalculatorViewController
 @synthesize picker;
@@ -110,46 +111,94 @@
 // the savedata method displays alert view that handles saving data
 - (IBAction)saveData:(id)sender
 {
+    Data * data = [[[Data alloc] init] autorelease];
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    __block UIAlertView *status = nil;
     [nf setPositiveFormat:@"#,###.##"];
     [nf setNegativeFormat:@"#,###.##"];
     
-    // display dialog asking how to save data. Values are passed, so that XML can be created from the app before grabbing data from the database
-    alert *question = [[[alert alloc] initSaveWithContent:@"Save As XML?" message:@"Do you want to export data to XML?" :self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue] autorelease];
+    UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Save as XML?" message:@"Do you want to save the data to XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
     
-    [question show];
+    [question showWithBlock:^(NSInteger buttonIndex)
+    {
+        if (buttonIndex == 1)
+        {
+            if ([data DBSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue])
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Save Successful" message:@"Data saved successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+            else
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Sorry, Data could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+        }
+    }
+                cancelBlock:^{
+                    if ([data XMLSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue]) {
+                        status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data successfully export to XML." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                    else if ([data DBXML])
+                    {
+                        status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data successfully export to XML, but had to use database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                    else
+                    {
+                        status = [[[UIAlertView alloc] initWithTitle:@"XML Export Failed" message:@"Data could not be saved to XML by any means." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                }];
+    
     [nf release];
-    
-    if (question.answer)
-    {
-        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Saved Successfully" message:@"Data was saved successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-        [status show];
-    }
-    else
-    {
-        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Save" message:@"Data failed to save." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-        [status show];
-    }
 }
 
 // the loadData method displays alert view that will handle loading data.
 - (IBAction)loadData
 {
-    // display dialog asking if user wants to load data from XML. UITextfield objects are passed, in order to populate view
-    alert *question = [[[alert alloc] initLoadWithContent:@"Load from XML?" message:@"Do you want to import data from XML?" :self.birth :self.bal :self.year] autorelease];
+    __block UIAlertView *status = nil;
+    Data *data = [[[Data alloc] init] autorelease];
     
-    [question show];
+    UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Load from XML?" message:@"Do you want to load from XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
     
-    if (question.answer)
+    [question showWithBlock:^(NSInteger buttonIndex)
     {
-        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Loaded Successfully" message:@"Data was loaded successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-        [status show];
+        if (buttonIndex == 1)
+        {
+            if ([data DBLoad:self.birth :self.bal :self.year])
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Load Successful" message:@"Data loaded from database successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+            else
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Load Failed" message:@"Data failed to load from database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+        }
     }
-    else
-    {
-        UIAlertView *status = [[[UIAlertView alloc] initWithTitle:@"Data Failed to Load" message:@"Data could not be loaded." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-        [status show];
-    }
+                cancelBlock:^{
+                    if ([data XMLLoad:self.birth :self.bal :self.year]) {
+                        status = [[[UIAlertView alloc] initWithTitle:@"Import Successful" message:@"Data imported from XML successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                    else
+                    {
+                        status = [[[UIAlertView alloc] initWithTitle:@"Import Failed" message:@"Data failed to import from XML." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                }];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
