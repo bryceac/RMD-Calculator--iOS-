@@ -20,7 +20,6 @@
     IBOutlet UIToolbar* yt;
     IBOutlet UIToolbar* dt;
     IBOutlet UIDatePicker* dpicker;
-    IBOutlet UILabel* status;
 
 }
 
@@ -33,7 +32,6 @@
 @property (nonatomic, retain) IBOutlet UIToolbar* yt;
 @property (nonatomic, retain) IBOutlet UIToolbar* dt;
 @property (nonatomic, retain) IBOutlet UIDatePicker* dpicker;
-@property (nonatomic, retain) IBOutlet UILabel* status;
 
 // the following are methods used for making things like buttons and pickers functional
 - (IBAction)calc:(id)sender;

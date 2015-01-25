@@ -10,6 +10,9 @@
 #import "RMD.h"
 #import "rmdSQL.h"
 #import "PrevYear.h"
+#import "APXML.h"
+#import "UIAlertView+Blocks.h"
+#import "Data.h"
 
 @implementation RMD_CalculatorViewController
 @synthesize picker;
@@ -21,7 +24,6 @@
 @synthesize yt;
 @synthesize dt;
 @synthesize dpicker;
-@synthesize status;
 
 /* the following hides the keyboard when the user says done */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -34,7 +36,7 @@
 {
     if (item.tag == 0)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:brycecmpbell@gmail.com"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:ios@brycecampbell.me"]];
     }
 }
 
@@ -106,85 +108,125 @@
 	[retire release]; // release RMD class from memory
 }
 
-// the savedata method sends input to SQLite for insertion or updating, if record exists
+// the savedata method displays alert view that handles saving data
 - (IBAction)saveData:(id)sender
 {
-    rmdSQL* db = [[rmdSQL alloc] init];
-    NSDateFormatter* sf = [[NSDateFormatter alloc] init];
-    [sf setDateFormat:@"MM/dd/yyyy"];
-    NSDateFormatter* mf = [[NSDateFormatter alloc] init];
-    [mf setDateFormat:@"yyyy-MM-dd"];
+    Data * data = [[[Data alloc] init] autorelease];
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    __block UIAlertView *status = nil;
     [nf setPositiveFormat:@"#,###.##"];
     [nf setNegativeFormat:@"#,###.##"];
     
-    NSNumber* number = [nf numberFromString:self.bal.text];
-    NSString* born = self.birth.text;
-    int distrib = self.year.text.intValue;
-    double ira = number.doubleValue;
+    UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Save as XML?" message:@"Do you want to save the data to XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
     
-    NSDate* bdate = [sf dateFromString:born];
-    [sf release];
-    born = [mf stringFromDate:bdate];
-    
-    if ([db records] > 0) 
+    // method that response better to dialogs
+    [question showWithBlock:^(NSInteger buttonIndex)
     {
-        if([db updateData:born :ira :distrib])
+        // if user said no, attempt to save data to database
+        if (buttonIndex == 1)
         {
-            self.status.text = @"Record updated sucessfully";
-        } else {
-            self.status.text = @"Record could not be updated";
-        }
-    } else {
-        if([db saveData:born :ira :distrib])
-        {
-            self.status.text = @"Save successful";
-        } else {
-            self.status.text = @"Could not save data";
+            if ([data DBSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue])
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Save Successful" message:@"Data saved successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+            else
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Sorry, Data could not be saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
         }
     }
-    [mf release];
-    [db release];
+     
+                // if user said yes, save data to XML, instead of to SQLite
+                cancelBlock:^{
+                    if ([data XMLSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue]) {
+                        status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data successfully export to XML." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                    else if ([data DBXML])
+                    {
+                        status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data successfully export to XML, but had to use database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                    else
+                    {
+                        status = [[[UIAlertView alloc] initWithTitle:@"XML Export Failed" message:@"Data could not be saved to XML by any means." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                }];
+    
     [nf release];
 }
 
-// the loadData method retrieves data from SQLite database
+// the loadData method displays alert view that will handle loading data.
 - (IBAction)loadData
 {
-    rmdSQL* db = [[rmdSQL alloc] init];
-    NSDateFormatter* bf = [[NSDateFormatter alloc] init];
-    [bf setDateFormat:@"MM/dd/yyyy"];
-    NSDateFormatter* df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd"];
-    NSString* bd;
+    __block UIAlertView *status = nil;
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
     [nf setPositiveFormat:@"#,###.##"];
     [nf setNegativeFormat:@"#,###.##"];
+    Data *data = [[[Data alloc] init] autorelease];
     
+    UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Load from XML?" message:@"Do you want to load from XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
     
-    
-    if ([db records] > 0) 
+    // the following is a method that alows easier dialog response
+    [question showWithBlock:^(NSInteger buttonIndex)
     {
-        NSDate* birthdate = [df dateFromString:[db birth]];
-        bd = [bf stringFromDate:birthdate];
-        self.birth.text = bd;
-        [bf release];
-        [df release];
-        self.bal.text = [nf stringFromNumber:[NSNumber numberWithDouble:[db bal]]];
-        [nf release];
-        self.year.text = [NSString stringWithFormat:@"%d", [db year]];
-        self.status.text = @"All data loaded successfully";
-    } else {
-        self.status.text = @"Could not load data because no records exist.";
-        [bf release];
-        [df release];
-        [nf release];
+        // check if user selected no and import data from database, instead of SQLite
+        if (buttonIndex == 1)
+        {
+            if ([data DBLoad:self.birth :self.bal :self.year])
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Load Successful" message:@"Data loaded from database successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+            else
+            {
+                status = [[[UIAlertView alloc] initWithTitle:@"Load Failed" message:@"Data failed to load from database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                
+                [status show];
+            }
+        }
     }
+     
+                // if user said yes import data from XML and attempt to save it to SQLite
+                cancelBlock:^{
+                    if ([data XMLLoad:self.birth :self.bal :self.year]) {
+                        
+                        if ([data DBSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue])
+                        {
+                            status = [[[UIAlertView alloc] initWithTitle:@"Import Successful" message:@"Data imported from XML successfully and was saved to database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                            
+                            [status show];
+                        }
+                        else
+                        {
+                            status = [[[UIAlertView alloc] initWithTitle:@"Import Successful" message:@"Data imported from XML successfully, but you might need to manually save to the database." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                            
+                            [status show];
+                        }
+                    }
+                    else
+                    {
+                        status = [[[UIAlertView alloc] initWithTitle:@"Import Failed" message:@"Data failed to import from XML." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+                        
+                        [status show];
+                    }
+                }];
+    
+    [nf release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	NSArray* array = [[NSArray alloc] initWithObjects:@"2011",@"2012",@"2013",@"2014",@"2015",@"2016",@"2017",@"2018",@"2019",nil];
+	NSArray* array = [[NSArray alloc] initWithObjects:@"2011",@"2012",@"2013",@"2014",@"2015",@"2016",@"2017",@"2018",@"2019",@"2020",@"2021",@"2022",@"2023",@"2024",@"2025",@"2026",@"2027",@"2028",nil];
 	NSDate* now = [NSDate date];
     [dpicker setDate:now];
     self.pickerArray = array;
@@ -194,7 +236,6 @@
     self.picker.dataSource = self;
     self.dt.hidden = YES;
     self.dpicker.hidden = YES;
-    self.status.text = nil;
 	[array release];
     [super viewDidLoad];
 }
