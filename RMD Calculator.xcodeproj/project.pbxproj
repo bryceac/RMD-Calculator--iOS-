@@ -33,6 +33,7 @@
 		6C0BD31D1A7049720003FF20 /* APAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0BD3171A7049720003FF20 /* APAttribute.m */; };
 		6C0BD31E1A7049720003FF20 /* APDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0BD3191A7049720003FF20 /* APDocument.m */; };
 		6C0BD31F1A7049720003FF20 /* APElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0BD31B1A7049720003FF20 /* APElement.m */; };
+		6C2F7BA11A746AAD00A74675 /* rmd_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C2F7BA01A746AAD00A74675 /* rmd_icon_120.png */; };
 		6C6463DE1A7045A400BA1685 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6463DD1A7045A400BA1685 /* libxml2.dylib */; };
 		6CC71CF81A6ECF6100040E42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */; };
 		6CEB64011A7415BC00F1CF1C /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB64001A7415BC00F1CF1C /* UIAlertView+Blocks.m */; };
@@ -83,6 +84,7 @@
 		6C0BD31A1A7049720003FF20 /* APElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APElement.h; sourceTree = "<group>"; };
 		6C0BD31B1A7049720003FF20 /* APElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APElement.m; sourceTree = "<group>"; };
 		6C0BD31C1A7049720003FF20 /* APXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APXML.h; sourceTree = "<group>"; };
+		6C2F7BA01A746AAD00A74675 /* rmd_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rmd_icon_120.png; sourceTree = "<group>"; };
 		6C6463DD1A7045A400BA1685 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6CEB63FF1A7415BC00F1CF1C /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6C2F7BA01A746AAD00A74675 /* rmd_icon_120.png */,
 				6CC71CF71A6ECF6100040E42 /* Default-568h@2x.png */,
 				5529752715857BDE007B8724 /* arrow_small.png */,
 				55297525158571FB007B8724 /* mailbox_small.png */,
@@ -264,6 +267,7 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* RMD_CalculatorViewController.xib in Resources */,
+				6C2F7BA11A746AAD00A74675 /* rmd_icon_120.png in Resources */,
 				551A5BAA146208400038703A /* rmd_icon_small.png in Resources */,
 				551A5BAC146208460038703A /* rmd_icon_114.png in Resources */,
 				550D579E153C6622006170DE /* mrd.db in Resources */,
