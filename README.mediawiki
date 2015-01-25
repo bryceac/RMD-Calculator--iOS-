@@ -17,7 +17,7 @@ This is the source code for the RMD Calculator app for iOS. This program makes u
 
 == App support ==
 
-Support can be gained two ways:
+Support can be gained via the following method:
 
 <ul>
 <li>
