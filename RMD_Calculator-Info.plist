@@ -16,6 +16,7 @@
 	<array>
 		<string>rmd_icon_small.png</string>
 		<string>rmd_icon_114.png</string>
+		<string>rmd_icon_120.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
