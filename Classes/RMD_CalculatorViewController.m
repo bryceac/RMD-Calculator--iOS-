@@ -119,8 +119,10 @@
     
     UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Save as XML?" message:@"Do you want to save the data to XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
     
+    // method that response better to dialogs
     [question showWithBlock:^(NSInteger buttonIndex)
     {
+        // if user said no, attempt to save data to database
         if (buttonIndex == 1)
         {
             if ([data DBSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue])
@@ -137,6 +139,8 @@
             }
         }
     }
+     
+                // if user said yes, save data to XML, instead of to SQLite
                 cancelBlock:^{
                     if ([data XMLSave:self.birth.text :[nf numberFromString:self.bal.text].doubleValue :self.year.text.intValue]) {
                         status = [[[UIAlertView alloc] initWithTitle:@"XML Export Successful" message:@"Data successfully export to XML." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
@@ -171,8 +175,10 @@
     
     UIAlertView *question = [[[UIAlertView alloc] initWithTitle:@"Load from XML?" message:@"Do you want to load from XML?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] autorelease];
     
+    // the following is a method that alows easier dialog response
     [question showWithBlock:^(NSInteger buttonIndex)
     {
+        // check if user selected no and import data from database, instead of SQLite
         if (buttonIndex == 1)
         {
             if ([data DBLoad:self.birth :self.bal :self.year])
@@ -189,6 +195,8 @@
             }
         }
     }
+     
+                // if user said yes import data from XML and attempt to save it to SQLite
                 cancelBlock:^{
                     if ([data XMLLoad:self.birth :self.bal :self.year]) {
                         
